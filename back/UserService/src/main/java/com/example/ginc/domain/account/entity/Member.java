@@ -2,6 +2,7 @@ package com.example.ginc.domain.account.entity;
 
 
 import com.example.ginc.domain.account.entity.type.Gender;
+import com.example.ginc.domain.account.entity.type.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -35,10 +36,13 @@ public class Member {
 
     private LocalDate birth;
 
+    private Role role;
+
     public Member(
             String username, String password,
             String name, int phoneNumber,
-            String email, Gender gender, LocalDate birth) {
+            String email, Gender gender,
+            LocalDate birth, Role role) {
         this.username=username;
         this.password=password;
         this.name=name;
@@ -46,15 +50,18 @@ public class Member {
         this.email=email;
         this.gender=gender;
         this.birth=birth;
+        this.role=role;
     }
 
     public static Member createMember(
             String username, String password,
             String name, int phoneNumber,
-            String email, Gender gender, LocalDate birth) {
+            String email, Gender gender,
+            LocalDate birth, Role role) {
         return new Member(
                 username, password, name,
-                phoneNumber, email, gender, birth
+                phoneNumber, email, gender,
+                birth, role
         );
     }
 }

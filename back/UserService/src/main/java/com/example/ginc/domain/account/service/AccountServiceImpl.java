@@ -28,7 +28,8 @@ public class AccountServiceImpl implements AccountService {
                         request.phoneNumber(),
                         request.email(),
                         request.gender(),
-                        request.birth()
+                        request.birth(),
+                        request.role()
                 )
         );
     }

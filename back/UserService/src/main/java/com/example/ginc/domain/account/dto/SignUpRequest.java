@@ -1,8 +1,7 @@
 package com.example.ginc.domain.account.dto;
 
 import com.example.ginc.domain.account.entity.type.Gender;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
+import com.example.ginc.domain.account.entity.type.Role;
 
 import java.time.LocalDate;
 
@@ -14,7 +13,8 @@ public record SignUpRequest(
         int phoneNumber,
         String email,
         Gender gender,
-        LocalDate birth
+        LocalDate birth,
+        Role role
 
 ) {
 }
