@@ -1,10 +1,14 @@
 package com.example.ginc.domain.account.service;
 
 import com.example.ginc.domain.account.dto.SignUpRequest;
+import com.example.ginc.domain.account.dto.UpdateRequest;
 import com.example.ginc.domain.account.entity.Member;
+import com.example.ginc.domain.account.exception.AccountException;
 import com.example.ginc.domain.account.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,9 +32,23 @@ public class AccountServiceImpl implements AccountService {
                         request.phoneNumber(),
                         request.email(),
                         request.gender(),
-                        request.birth(),
-                        request.role()
+                        request.birth()
                 )
         );
+    }
+
+    @Override
+    @Transactional
+    public void updateUserInfo(Long id, UpdateRequest request) {
+        Member member = findById(id);
+        member.updateInfo(
+                request.password(), request.name(),
+                request.birth(), LocalDate.now()
+        );
+
+    }
+
+    private Member findById(long id) {
+        return accountRepository.findById(id).orElseThrow(AccountException.MemberNotFoundException::new);
     }
 }

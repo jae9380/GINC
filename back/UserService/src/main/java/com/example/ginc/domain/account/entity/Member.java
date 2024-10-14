@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+import static com.example.ginc.domain.account.entity.type.Role.*;
+
 @Entity
 @Table(name = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -38,11 +40,15 @@ public class Member {
 
     private Role role;
 
+    private LocalDate createdAt;
+
+    private LocalDate modifiedAt;
+
     public Member(
             String username, String password,
             String name, int phoneNumber,
             String email, Gender gender,
-            LocalDate birth, Role role) {
+            LocalDate birth, Role role, LocalDate localDate) {
         this.username=username;
         this.password=password;
         this.name=name;
@@ -51,17 +57,27 @@ public class Member {
         this.gender=gender;
         this.birth=birth;
         this.role=role;
+        this.createdAt=localDate;
     }
 
     public static Member createMember(
             String username, String password,
             String name, int phoneNumber,
             String email, Gender gender,
-            LocalDate birth, Role role) {
+            LocalDate birth) {
+        boolean isAdmin = username.toLowerCase().contains("admin");
         return new Member(
                 username, password, name,
                 phoneNumber, email, gender,
-                birth, role
+                birth, isAdmin ? ADMIN : USER, LocalDate.now()
         );
+    }
+
+    public void updateInfo(
+            String password, String name, LocalDate birth, LocalDate modifiedAt
+    ) {
+     if (!password.isEmpty()&&password!=null) this.password=password;
+     if (!name.isEmpty()&&name!=null) this.name=name;
+     if (birth!=null) this.birth=birth;
     }
 }
