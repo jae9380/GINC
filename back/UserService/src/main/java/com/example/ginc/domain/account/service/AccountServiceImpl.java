@@ -24,6 +24,13 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional
     public void signup(SignUpRequest request) {
+        /* TODO
+         유저 아이디 기반으로 기존 가입된 유저 유무 확인 로직 추가
+
+         case1: 기존 유저가 있다면, 커스텀 에러 발생
+         case2: 기존 유저가 없다면, 계정 성공적인 생성
+            -1: 만약 아이디에 "admin"(대소문자 상관 x) 포함 시 관리자 Role
+         */
         accountRepository.save(
                 Member.createMember(
                         request.username(),
