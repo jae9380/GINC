@@ -1,9 +1,6 @@
-package com.example.ginc.domain.account.exception;
+package com.example.ginc.util.exception;
 
-import lombok.Getter;
-import org.springframework.http.HttpStatus;
-
-import static com.example.ginc.domain.account.exception.ErrorCode.*;
+import static com.example.ginc.util.exception.ErrorCode.*;
 
 public class AccountException extends RuntimeException {
 
@@ -31,16 +28,3 @@ public class AccountException extends RuntimeException {
     }
 }
 
-@Getter
-enum ErrorCode {
-    DUPLICATE_USERNAME(HttpStatus.BAD_REQUEST, "이미 존재하는 아이디 입니다."),
-    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "일치하는 회원정보가 없습니다.");
-
-    private final HttpStatus status;
-    private final String message;
-
-    ErrorCode(HttpStatus status, String message) {
-        this.status = status;
-        this.message = message;
-    }
-}

@@ -3,7 +3,7 @@ package com.example.ginc.domain.account.controller;
 import com.example.ginc.domain.account.dto.SignUpRequest;
 import com.example.ginc.domain.account.dto.UpdateRequest;
 import com.example.ginc.domain.account.service.AccountService;
-import com.example.ginc.util.ApiResponse;
+import com.example.ginc.util.apiResponse.ApiResponse;
 import com.example.ginc.util.Empty;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;

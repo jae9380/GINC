@@ -1,4 +1,4 @@
-package com.example.ginc.util;
+package com.example.ginc.util.apiResponse;
 
 import lombok.Getter;
 

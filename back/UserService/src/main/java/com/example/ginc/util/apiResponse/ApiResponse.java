@@ -1,8 +1,11 @@
-package com.example.ginc.util;
+package com.example.ginc.util.apiResponse;
 
+import com.example.ginc.util.Empty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+
+import static com.example.ginc.util.apiResponse.ApiResultType.*;
 
 @Getter
 public class ApiResponse<T>{
@@ -31,7 +34,7 @@ public class ApiResponse<T>{
         return new ApiResponse<>(
                 HttpStatus.OK.value(),
                 HttpStatus.OK.getReasonPhrase(),
-                ApiResultType.SUCCESS,
+                SUCCESS,
                 data
         );
     }
@@ -40,7 +43,7 @@ public class ApiResponse<T>{
         return new ApiResponse<>(
                 HttpStatus.CREATED.value(),
                 HttpStatus.CREATED.getReasonPhrase(),
-                ApiResultType.SUCCESS,
+                SUCCESS,
                 new Empty()
         );
     }
@@ -49,8 +52,19 @@ public class ApiResponse<T>{
         return new ApiResponse<>(
                 HttpStatus.NO_CONTENT.value(),
                 HttpStatus.NO_CONTENT.getReasonPhrase(),
-                ApiResultType.SUCCESS,
+                SUCCESS,
                 new Empty()
+        );
+    }
+
+    // 에러 응답 추가
+    public static <T> ApiResponse<T> error(HttpStatus status, String errorCode, String message) {
+        return new ApiResponse<>(
+                status.value(),
+                message,
+                EXCEPTION,
+                errorCode,
+                null
         );
     }
 }

@@ -64,12 +64,11 @@ public class Member {
             String username, String password,
             String name, int phoneNumber,
             String email, Gender gender,
-            LocalDate birth) {
-        boolean isAdmin = username.toLowerCase().contains("admin");
+            LocalDate birth, Role role) {
         return new Member(
                 username, password, name,
                 phoneNumber, email, gender,
-                birth, isAdmin ? ADMIN : USER, LocalDate.now()
+                birth, role, LocalDate.now()
         );
     }
 
