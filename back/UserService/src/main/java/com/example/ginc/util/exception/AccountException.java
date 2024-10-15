@@ -26,5 +26,11 @@ public class AccountException extends RuntimeException {
             super(MEMBER_NOT_FOUND);
         }
     }
+
+    public static class InvalidPasswordException extends AccountException {
+        public InvalidPasswordException() {
+            super(INVALID_PASSWORD);
+        }
+    }
 }
 
