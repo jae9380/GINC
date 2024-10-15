@@ -58,12 +58,18 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void login(SignInRequest request) {
-        Member member = accountRepository.findByUsername(request.username())
-                .orElseThrow(AccountException.MemberNotFoundException::new);
+        Member member = getByUsername(request.username());
 
         if (!bCryptPasswordEncoder.matches(request.password(), member.getPassword())) {
             throw new AccountException.InvalidPasswordException();
         }
+    }
+
+    @Override
+    public Member getByUsername(String username) {
+        Member member = accountRepository.findByUsername(username)
+                .orElseThrow(AccountException.MemberNotFoundException::new);
+        return member;
     }
 
     private Member findById(long id) {
