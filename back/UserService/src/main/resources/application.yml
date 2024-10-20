@@ -16,3 +16,6 @@ spring:
     url: jdbc:h2:mem:testdb
     username: sa
     password:
+
+jwt:
+  secret-key: GINSUPERSECRETKEYISVERYLONGANDSECURETYPE1234

@@ -40,6 +40,8 @@ public class Member {
 
     private Role role;
 
+    private boolean authenticated;
+
     private LocalDate createdAt;
 
     private LocalDate modifiedAt;
@@ -48,7 +50,7 @@ public class Member {
             String username, String password,
             String name, int phoneNumber,
             String email, Gender gender,
-            LocalDate birth, Role role, LocalDate localDate) {
+            LocalDate birth, Role role,boolean authenticated, LocalDate localDate) {
         this.username=username;
         this.password=password;
         this.name=name;
@@ -57,6 +59,7 @@ public class Member {
         this.gender=gender;
         this.birth=birth;
         this.role=role;
+        this.authenticated=authenticated;
         this.createdAt=localDate;
     }
 
@@ -68,7 +71,7 @@ public class Member {
         return new Member(
                 username, password, name,
                 phoneNumber, email, gender,
-                birth, role, LocalDate.now()
+                birth, role,false, LocalDate.now()
         );
     }
 

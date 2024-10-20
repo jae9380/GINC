@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -12,8 +13,8 @@ import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
-public class JWTTokenProvider {
-    private final JWTProperties jwtProperties;
+public class JwtTokenProvider {
+    private final Environment env;
 
     public String generateToken(Member member, Duration expiredAt) {
         Date now = new Date();
@@ -27,7 +28,7 @@ public class JWTTokenProvider {
                 .claim("username", member.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expiry)
-                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
+                .signWith(SignatureAlgorithm.HS256, env.getProperty("jwt.secret-key"))
                 .compact();
     }
 
@@ -44,7 +45,7 @@ public class JWTTokenProvider {
 
     private Claims parseClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(jwtProperties.getSecretKey())
+                .setSigningKey(env.getProperty("jwt.secret-key"))
                 .build()
                 .parseClaimsJws(token)
                 .getBody();

@@ -17,8 +17,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class JWTFilter extends OncePerRequestFilter {
-    private final JWTTokenProvider jwtTokenProvider;
+public class JwtFilter extends OncePerRequestFilter {
+    private final JwtTokenProvider jwtTokenProvider;
     private final CustomUserDetailsService customUserDetailsService;
 
     @Override

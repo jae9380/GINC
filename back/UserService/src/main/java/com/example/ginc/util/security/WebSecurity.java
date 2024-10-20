@@ -1,17 +1,14 @@
 package com.example.ginc.util.security;
 
-import com.example.ginc.domain.account.service.AccountService;
 import com.example.ginc.util.auth.CustomUserDetailsService;
-import com.example.ginc.util.auth.JWTFilter;
-import com.example.ginc.util.auth.JWTProperties;
-import com.example.ginc.util.auth.JWTTokenProvider;
+import com.example.ginc.util.auth.JwtFilter;
+import com.example.ginc.util.auth.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -26,7 +23,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @RequiredArgsConstructor
 public class WebSecurity {
 
-    private final JWTTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
     private final CustomUserDetailsService customUserDetailsService;
 
     @Bean
@@ -50,7 +47,7 @@ public class WebSecurity {
                     requests
                             .requestMatchers("/h2-console/**").permitAll()
                             .requestMatchers("/api/account/**").permitAll()
-                            .requestMatchers("/login", "/api/account/signup", "/api/member/login").permitAll()
+                            .requestMatchers("/login", "/api/account/signup", "/api/account/login").permitAll()
                             .anyRequest()
                             .authenticated();
                 })
@@ -70,7 +67,7 @@ public class WebSecurity {
     }
 
     @Bean
-    public JWTFilter jwtFilter() {
-        return new JWTFilter(jwtTokenProvider, customUserDetailsService);
+    public JwtFilter jwtFilter() {
+        return new JwtFilter(jwtTokenProvider, customUserDetailsService);
     }
 }
