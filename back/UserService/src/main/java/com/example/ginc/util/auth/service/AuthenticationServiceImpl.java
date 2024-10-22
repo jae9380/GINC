@@ -29,12 +29,10 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     public SignInResponse authenticateAndSetTokens(String username, HttpServletRequest request, HttpServletResponse response) {
         Member member = accountService.getByUsername(username);
 
-        // 리프레쉬 토큰
         String refreshToken = jwtTokenProvider.generateToken(member, REFRESH_TOKEN_DURATION);
         refreshTokenService.save(member.getId(), refreshToken);
         addTokenToCookie(request, response, REFRESH_TOKEN_COOKIE_NAME, refreshToken, REFRESH_TOKEN_DURATION);
 
-        // 액세스 토큰
         String accessToken = jwtTokenProvider.generateToken(member, ACCESS_TOKEN_DURATION);
         addTokenToCookie(request, response, ACCESS_TOKEN_COOKIE_NAME, accessToken, ACCESS_TOKEN_DURATION);
 
