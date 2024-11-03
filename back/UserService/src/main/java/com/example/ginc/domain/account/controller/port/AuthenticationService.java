@@ -1,4 +1,4 @@
-package com.example.ginc.util.auth.service;
+package com.example.ginc.domain.account.controller.port;
 
 import com.example.ginc.domain.account.controller.response.SignInResponse;
 import jakarta.servlet.http.HttpServletRequest;

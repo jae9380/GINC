@@ -1,14 +1,15 @@
-package com.example.ginc.util.auth.service;
+package com.example.ginc.util.auth.infrastructure;
 
-import com.example.ginc.util.auth.RefreshToken;
-import com.example.ginc.util.auth.repository.RefreshTokenRepository;
+import com.example.ginc.util.auth.domain.RefreshToken;
+import com.example.ginc.util.auth.service.port.RefreshTokenRepository;
+import com.example.ginc.util.auth.service.port.RefreshTokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class RefreshTokenServiceImpl implements RefreshTokenService{
+class RefreshTokenServiceImpl implements RefreshTokenService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Override

@@ -1,7 +1,7 @@
-package com.example.ginc.util.auth;
+package com.example.ginc.util.auth.infrastructure;
 
-import com.example.ginc.domain.account.infrastructure.entity.UserJpaEntity;
-import com.example.ginc.util.auth.service.CustomService;
+import com.example.ginc.domain.account.domain.UserDomainEntity;
+import com.example.ginc.util.auth.MemberDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,8 +17,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserJpaEntity userJpaEntity = customService.getByUsername(username);
+        UserDomainEntity userDomainEntity = customService.getByUsername(username);
 
-        return new MemberDetails(userJpaEntity);
+        return new MemberDetails(userDomainEntity);
     }
 }

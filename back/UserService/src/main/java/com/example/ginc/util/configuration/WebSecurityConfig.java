@@ -1,8 +1,8 @@
 package com.example.ginc.util.configuration;
 
-import com.example.ginc.util.auth.CustomUserDetailsService;
+import com.example.ginc.util.auth.infrastructure.CustomUserDetailsService;
 import com.example.ginc.util.auth.JwtFilter;
-import com.example.ginc.util.auth.JwtTokenProvider;
+import com.example.ginc.util.auth.infrastructure.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -8,7 +8,7 @@ import com.example.ginc.domain.account.controller.port.AccountService;
 import com.example.ginc.util.apiResponse.ApiResponse;
 import com.example.ginc.util.Empty;
 import com.example.ginc.util.auth.CookieUtil;
-import com.example.ginc.util.auth.service.AuthenticationService;
+import com.example.ginc.domain.account.controller.port.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

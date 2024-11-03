@@ -13,8 +13,6 @@ import java.util.Optional;
 public class AccountRepositoryImpl implements AccountRepository {
     private final AccountJpaRepository accountJpaRepository;
 
-
-
     @Override
     public Optional<UserDomainEntity> findByUsername(String username) {
         return accountJpaRepository.findByUsername(username)

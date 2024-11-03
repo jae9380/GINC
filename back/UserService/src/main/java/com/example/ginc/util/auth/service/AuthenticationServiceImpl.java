@@ -1,11 +1,13 @@
 package com.example.ginc.util.auth.service;
 
+import com.example.ginc.domain.account.controller.port.AuthenticationService;
 import com.example.ginc.domain.account.controller.response.SignInResponse;
 import com.example.ginc.domain.account.domain.UserDomainEntity;
-import com.example.ginc.domain.account.infrastructure.entity.UserJpaEntity;
-import com.example.ginc.domain.account.controller.port.AccountService;
+import com.example.ginc.domain.account.service.port.AccountRepository;
 import com.example.ginc.util.auth.CookieUtil;
-import com.example.ginc.util.auth.JwtTokenProvider;
+import com.example.ginc.util.auth.infrastructure.JwtTokenProvider;
+import com.example.ginc.util.auth.service.port.RefreshTokenService;
+import com.example.ginc.util.exception.AccountException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +17,9 @@ import java.time.Duration;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationServiceImpl implements AuthenticationService{
+public class AuthenticationServiceImpl implements AuthenticationService {
 
-    private final AccountService accountService;
+    private final AccountRepository accountRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final RefreshTokenService refreshTokenService;
 
@@ -28,7 +30,8 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 
     @Override
     public SignInResponse authenticateAndSetTokens(String username, HttpServletRequest request, HttpServletResponse response) {
-        UserDomainEntity userDomainEntity = accountService.getByUsername(username);
+        UserDomainEntity userDomainEntity = accountRepository.findByUsername(username)
+                .orElseThrow(AccountException.MemberNotFoundException::new);
 
         String refreshToken = jwtTokenProvider.generateToken(userDomainEntity, REFRESH_TOKEN_DURATION);
         refreshTokenService.save(userDomainEntity.getId(), refreshToken);

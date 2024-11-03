@@ -1,7 +1,6 @@
-package com.example.ginc.util.auth;
+package com.example.ginc.util.auth.infrastructure;
 
 import com.example.ginc.domain.account.domain.UserDomainEntity;
-import com.example.ginc.domain.account.infrastructure.entity.UserJpaEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
