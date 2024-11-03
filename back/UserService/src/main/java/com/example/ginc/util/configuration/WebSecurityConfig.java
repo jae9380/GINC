@@ -1,4 +1,4 @@
-package com.example.ginc.util.security;
+package com.example.ginc.util.configuration;
 
 import com.example.ginc.util.auth.CustomUserDetailsService;
 import com.example.ginc.util.auth.JwtFilter;
@@ -21,7 +21,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class WebSecurity {
+public class WebSecurityConfig {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final CustomUserDetailsService customUserDetailsService;

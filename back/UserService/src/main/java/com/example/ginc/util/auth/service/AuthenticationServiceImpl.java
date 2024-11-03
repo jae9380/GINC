@@ -1,8 +1,9 @@
 package com.example.ginc.util.auth.service;
 
-import com.example.ginc.domain.account.dto.SignInResponse;
-import com.example.ginc.domain.account.entity.Member;
-import com.example.ginc.domain.account.service.AccountService;
+import com.example.ginc.domain.account.controller.response.SignInResponse;
+import com.example.ginc.domain.account.domain.UserDomainEntity;
+import com.example.ginc.domain.account.infrastructure.entity.UserJpaEntity;
+import com.example.ginc.domain.account.controller.port.AccountService;
 import com.example.ginc.util.auth.CookieUtil;
 import com.example.ginc.util.auth.JwtTokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,16 +28,16 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 
     @Override
     public SignInResponse authenticateAndSetTokens(String username, HttpServletRequest request, HttpServletResponse response) {
-        Member member = accountService.getByUsername(username);
+        UserDomainEntity userDomainEntity = accountService.getByUsername(username);
 
-        String refreshToken = jwtTokenProvider.generateToken(member, REFRESH_TOKEN_DURATION);
-        refreshTokenService.save(member.getId(), refreshToken);
+        String refreshToken = jwtTokenProvider.generateToken(userDomainEntity, REFRESH_TOKEN_DURATION);
+        refreshTokenService.save(userDomainEntity.getId(), refreshToken);
         addTokenToCookie(request, response, REFRESH_TOKEN_COOKIE_NAME, refreshToken, REFRESH_TOKEN_DURATION);
 
-        String accessToken = jwtTokenProvider.generateToken(member, ACCESS_TOKEN_DURATION);
+        String accessToken = jwtTokenProvider.generateToken(userDomainEntity, ACCESS_TOKEN_DURATION);
         addTokenToCookie(request, response, ACCESS_TOKEN_COOKIE_NAME, accessToken, ACCESS_TOKEN_DURATION);
 
-        return SignInResponse.from(member);
+        return SignInResponse.from(userDomainEntity);
     }
 
     @Override

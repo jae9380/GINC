@@ -1,7 +1,7 @@
 package com.example.ginc.domain.account.dto;
 
-import com.example.ginc.domain.account.entity.type.Gender;
-import com.example.ginc.domain.account.entity.type.Role;
+import com.example.ginc.domain.account.infrastructure.entity.type.Gender;
+import lombok.Getter;
 
 import java.time.LocalDate;
 

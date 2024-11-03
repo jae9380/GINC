@@ -1,6 +1,7 @@
 package com.example.ginc.util.auth;
 
-import com.example.ginc.domain.account.entity.Member;
+import com.example.ginc.domain.account.domain.UserDomainEntity;
+import com.example.ginc.domain.account.infrastructure.entity.UserJpaEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,16 +17,16 @@ import java.util.Date;
 public class JwtTokenProvider {
     private final Environment env;
 
-    public String generateToken(Member member, Duration expiredAt) {
+    public String generateToken(UserDomainEntity userDomainEntity, Duration expiredAt) {
         Date now = new Date();
-        return createJwt(member, new Date(now.getTime() + expiredAt.toMillis()));
+        return createJwt(userDomainEntity, new Date(now.getTime() + expiredAt.toMillis()));
     }
 
 
-    public String createJwt(Member member, Date expiry) {
+    public String createJwt(UserDomainEntity userDomainEntity, Date expiry) {
         Date now = new Date();
         return Jwts.builder()
-                .claim("username", member.getUsername())
+                .claim("username", userDomainEntity.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expiry)
                 .signWith(SignatureAlgorithm.HS256, env.getProperty("jwt.secret-key"))

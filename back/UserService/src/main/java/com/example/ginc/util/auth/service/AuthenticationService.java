@@ -1,6 +1,6 @@
 package com.example.ginc.util.auth.service;
 
-import com.example.ginc.domain.account.dto.SignInResponse;
+import com.example.ginc.domain.account.controller.response.SignInResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

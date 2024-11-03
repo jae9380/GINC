@@ -1,11 +1,14 @@
 package com.example.ginc.domain.account.service;
 
+import com.example.ginc.domain.account.controller.port.AccountService;
+import com.example.ginc.domain.account.domain.UserDomainEntity;
 import com.example.ginc.domain.account.dto.SignInRequest;
 import com.example.ginc.domain.account.dto.SignUpRequest;
 import com.example.ginc.domain.account.dto.UpdateRequest;
-import com.example.ginc.domain.account.entity.Member;
+import com.example.ginc.domain.account.infrastructure.entity.UserJpaEntity;
+import com.example.ginc.domain.account.service.port.AccountRepository;
+import com.example.ginc.domain.account.service.port.BCryptPasswordEncoderService;
 import com.example.ginc.util.exception.AccountException;
-import com.example.ginc.domain.account.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,66 +16,50 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
-import static com.example.ginc.domain.account.entity.type.Role.*;
-
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoderService bCryptPasswordEncoderService;
 
     @Override
     @Transactional
     public void signup(SignUpRequest request) {
+        accountRepository.findByUsername(request.username());
 
-        accountRepository.findByUsername(request.username())
-                .ifPresent(member -> {
-                    throw new AccountException.DuplicateUsernameException();
-                });
-
-        accountRepository.save(
-                Member.createMember(
-                        request.username(),
-                        bCryptPasswordEncoder.encode(request.password()),
-                        request.name(),
-                        request.phoneNumber(),
-                        request.email(),
-                        request.gender(),
-                        request.birth(),
-                        request.username().toLowerCase().contains("admin")? ADMIN : USER
-                )
-        );
+        String encryptedPassword = bCryptPasswordEncoderService.encrypt(request.password());
+        UserDomainEntity userDomain = UserDomainEntity.create(request, encryptedPassword);
+        accountRepository.save(userDomain);
     }
 
     @Override
     @Transactional
     public void updateUserInfo(Long id, UpdateRequest request) {
-        Member member = findById(id);
-        member.updateInfo(
-                request.password(), request.name(),
-                request.birth(), LocalDate.now()
-        );
+        UserDomainEntity userDomainEntity = findById(id);
+        userDomainEntity.update(request);
+
+        accountRepository.save( userDomainEntity);
     }
 
     @Override
     public void login(SignInRequest request) {
-        Member member = getByUsername(request.username());
+        UserDomainEntity userDomainEntity = getByUsername(request.username());
 
-        if (!bCryptPasswordEncoder.matches(request.password(), member.getPassword())) {
+        if (!bCryptPasswordEncoderService.matches(request.password(), userDomainEntity.getPassword())) {
             throw new AccountException.InvalidPasswordException();
         }
     }
 
     @Override
-    public Member getByUsername(String username) {
-        Member member = accountRepository.findByUsername(username)
+    public UserDomainEntity getByUsername(String username) {
+        UserDomainEntity userDomainEntity = accountRepository.findByUsername(username)
                 .orElseThrow(AccountException.MemberNotFoundException::new);
-        return member;
+        return userDomainEntity;
     }
 
-    private Member findById(long id) {
+    private UserDomainEntity findById(long id) {
         return accountRepository.findById(id).orElseThrow(AccountException.MemberNotFoundException::new);
     }
 }

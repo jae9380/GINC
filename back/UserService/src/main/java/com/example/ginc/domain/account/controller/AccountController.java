@@ -1,22 +1,19 @@
 package com.example.ginc.domain.account.controller;
 
 import com.example.ginc.domain.account.dto.SignInRequest;
-import com.example.ginc.domain.account.dto.SignInResponse;
+import com.example.ginc.domain.account.controller.response.SignInResponse;
 import com.example.ginc.domain.account.dto.SignUpRequest;
 import com.example.ginc.domain.account.dto.UpdateRequest;
-import com.example.ginc.domain.account.service.AccountService;
+import com.example.ginc.domain.account.controller.port.AccountService;
 import com.example.ginc.util.apiResponse.ApiResponse;
 import com.example.ginc.util.Empty;
 import com.example.ginc.util.auth.CookieUtil;
-import com.example.ginc.util.auth.MemberDetails;
 import com.example.ginc.util.auth.service.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;

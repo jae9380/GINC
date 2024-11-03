@@ -1,10 +1,10 @@
-package com.example.ginc.domain.account.service;
+package com.example.ginc.domain.account.controller.port;
 
+import com.example.ginc.domain.account.domain.UserDomainEntity;
 import com.example.ginc.domain.account.dto.SignInRequest;
 import com.example.ginc.domain.account.dto.SignUpRequest;
 import com.example.ginc.domain.account.dto.UpdateRequest;
-import com.example.ginc.domain.account.entity.Member;
-import org.springframework.transaction.annotation.Transactional;
+import com.example.ginc.domain.account.infrastructure.entity.UserJpaEntity;
 
 public interface AccountService {
     void signup(SignUpRequest request);
@@ -13,5 +13,5 @@ public interface AccountService {
 
     void login(SignInRequest signInRequest);
 
-    Member getByUsername(String username);
+    UserDomainEntity getByUsername(String username);
 }

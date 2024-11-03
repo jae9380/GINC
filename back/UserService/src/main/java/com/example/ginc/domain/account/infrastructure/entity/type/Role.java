@@ -1,4 +1,4 @@
-package com.example.ginc.domain.account.entity.type;
+package com.example.ginc.domain.account.infrastructure.entity.type;
 
 import lombok.Getter;
 
