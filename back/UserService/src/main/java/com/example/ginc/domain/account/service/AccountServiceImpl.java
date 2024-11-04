@@ -35,7 +35,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional
     public void updateUserInfo(Long id, UpdateRequest request) {
-        UserDomainEntity userDomainEntity = findById(id);
+        UserDomainEntity userDomainEntity = getById(id);
         userDomainEntity = userDomainEntity.update(request, clockHolder);
         accountRepository.save( userDomainEntity);
     }
@@ -56,6 +56,10 @@ public class AccountServiceImpl implements AccountService {
         return userDomainEntity;
     }
 
+    @Override
+    public UserDomainEntity getById(Long id) {
+        return findById(id);
+    }
     private UserDomainEntity findById(long id) {
         return accountRepository.findById(id).orElseThrow(AccountException.MemberNotFoundException::new);
     }

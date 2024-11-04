@@ -14,4 +14,6 @@ public interface AccountService {
     void login(SignInRequest signInRequest);
 
     UserDomainEntity getByUsername(String username);
+
+    UserDomainEntity getById(Long id);
 }

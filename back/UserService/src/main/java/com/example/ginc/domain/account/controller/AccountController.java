@@ -33,12 +33,6 @@ public class AccountController {
         return ApiResponse.created();
     }
 
-    @PutMapping("/updateInfo/{id}")
-    public ApiResponse<Empty> updateInfo(@RequestBody @Valid UpdateRequest request,  @PathVariable(name = "id") Long id) {
-        accountService.updateUserInfo(id, request);
-        return ApiResponse.noContent();
-    }
-
     @PostMapping ("/login")
     public ApiResponse<SignInResponse> login(@RequestBody @Valid SignInRequest signInRequest,
                                              HttpServletRequest request, HttpServletResponse response) {
