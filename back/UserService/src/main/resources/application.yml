@@ -5,6 +5,10 @@ spring:
   application:
     name: GINC
 
+  profiles:
+    active: dev
+    include: secret
+
   # H2 Setting Info
   h2:
     console:
@@ -13,9 +17,9 @@ spring:
   # Database Setting Info
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb;MODE=MySQL;
     username: sa
     password:
 
 jwt:
-  secret-key: GINSUPERSECRETKEYISVERYLONGANDSECURETYPE1234
+  secret-key: ${jwt.secret-key}

@@ -5,24 +5,22 @@ import com.example.ginc.domain.account.domain.UserDomainEntity;
 import com.example.ginc.domain.account.dto.SignInRequest;
 import com.example.ginc.domain.account.dto.SignUpRequest;
 import com.example.ginc.domain.account.dto.UpdateRequest;
-import com.example.ginc.domain.account.infrastructure.entity.UserJpaEntity;
 import com.example.ginc.domain.account.service.port.AccountRepository;
 import com.example.ginc.domain.account.service.port.BCryptPasswordEncoderService;
+import com.example.ginc.util.commone.service.port.ClockHolder;
 import com.example.ginc.util.exception.AccountException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
-
     private final AccountRepository accountRepository;
     private final BCryptPasswordEncoderService bCryptPasswordEncoderService;
+    private final ClockHolder clockHolder;
 
     @Override
     @Transactional
@@ -30,7 +28,7 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.findByUsername(request.username());
 
         String encryptedPassword = bCryptPasswordEncoderService.encrypt(request.password());
-        UserDomainEntity userDomain = UserDomainEntity.create(request, encryptedPassword);
+        UserDomainEntity userDomain = UserDomainEntity.create(request, encryptedPassword, clockHolder);
         accountRepository.save(userDomain);
     }
 
@@ -38,8 +36,7 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     public void updateUserInfo(Long id, UpdateRequest request) {
         UserDomainEntity userDomainEntity = findById(id);
-        userDomainEntity.update(request);
-
+        userDomainEntity = userDomainEntity.update(request, clockHolder);
         accountRepository.save( userDomainEntity);
     }
 

@@ -1,0 +1,2 @@
+INSERT INTO member (username, password, name, phoneNumber, email, gender, birth, role, authenticated, createdAt, modifiedAt)
+VALUES ('testuser', 'test1234', '신짱구', '01010101010', 'test@example.com', 'MALE', '1990-01-01', 'USER', true, NULL, NULL)

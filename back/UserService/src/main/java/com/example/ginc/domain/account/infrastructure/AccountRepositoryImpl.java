@@ -21,7 +21,8 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public Optional<UserDomainEntity> findById(long id) {
-        return Optional.empty();
+        return accountJpaRepository.findById(id)
+                .map(UserJpaEntity::to);
     }
 
     @Override

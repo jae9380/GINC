@@ -5,10 +5,13 @@ import com.example.ginc.domain.account.dto.SignUpRequest;
 import com.example.ginc.domain.account.dto.UpdateRequest;
 import com.example.ginc.domain.account.infrastructure.entity.type.Gender;
 import com.example.ginc.domain.account.infrastructure.entity.type.Role;
+import com.example.ginc.util.commone.service.port.ClockHolder;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDate;
+
+import static com.example.ginc.domain.account.infrastructure.entity.type.Role.*;
 
 @Getter
 public class UserDomainEntity {
@@ -41,7 +44,7 @@ public class UserDomainEntity {
         this.modifiedAt = modifiedAt;
     }
 
-    public static UserDomainEntity create(SignUpRequest signUpRequest, String password) {
+    public static UserDomainEntity create(SignUpRequest signUpRequest, String password, ClockHolder clockHolder) {
         return UserDomainEntity.builder()
                 .username(signUpRequest.username())
                 .password(password)
@@ -50,10 +53,12 @@ public class UserDomainEntity {
                 .email(signUpRequest.email())
                 .gender(signUpRequest.gender())
                 .birth(signUpRequest.birth())
+                .role(signUpRequest.username().equals("admin")?ADMIN:GUEST)
+                .createdAt(clockHolder.now())
                 .build();
     }
 
-    public UserDomainEntity update(UpdateRequest updateRequest) {
+    public UserDomainEntity update(UpdateRequest updateRequest, ClockHolder clockHolder) {
         return UserDomainEntity.builder()
                 .id(id)
                 .username(username)
@@ -66,7 +71,7 @@ public class UserDomainEntity {
                 .role(role)
                 .authenticated(authenticated)
                 .createdAt(createdAt)
-                .modifiedAt(modifiedAt)
+                .modifiedAt(clockHolder.now())
                 .build();
     }
 }
