@@ -1,0 +1,1 @@
+delete from `member` where 1;

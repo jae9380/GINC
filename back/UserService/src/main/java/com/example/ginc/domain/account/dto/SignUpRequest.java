@@ -10,7 +10,7 @@ public record SignUpRequest(
         String username,
         String password,
         String name,
-        int phoneNumber,
+        String phoneNumber,
         String email,
         Gender gender,
         LocalDate birth
