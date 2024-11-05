@@ -26,14 +26,14 @@ public class UserJpaEntity {
     @Column(unique = true, nullable = false, name = "username")
     private String username;
 
-    @Column(name = "password")
+    @Column(nullable = false, name = "password")
     private String password;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "phoneNumber")
-    private int phoneNumber;
+    private String phoneNumber;
 
     @Email
     @Column(name = "email")

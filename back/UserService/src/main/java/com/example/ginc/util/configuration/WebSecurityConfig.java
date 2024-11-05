@@ -27,11 +27,6 @@ public class WebSecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
     public WebSecurityCustomizer configure() {
         return (web) -> web.ignoring()
                 .requestMatchers("/h2-console/**");

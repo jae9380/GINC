@@ -19,7 +19,7 @@ public class UserDomainEntity {
     private final String username;
     private final String password;
     private final String name;
-    private final int phoneNumber;
+    private final String phoneNumber;
     private final String email;
     private final Gender gender;
     private final LocalDate birth;
@@ -29,7 +29,7 @@ public class UserDomainEntity {
     private final LocalDate modifiedAt;
 
     @Builder
-    public UserDomainEntity(Long id, String username, String password, String name, int phoneNumber, String email, Gender gender, LocalDate birth, Role role, boolean authenticated, LocalDate createdAt, LocalDate modifiedAt) {
+    public UserDomainEntity(Long id, String username, String password, String name, String phoneNumber, String email, Gender gender, LocalDate birth, Role role, boolean authenticated, LocalDate createdAt, LocalDate modifiedAt) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -52,7 +52,7 @@ public class UserDomainEntity {
                 .phoneNumber(signUpRequest.phoneNumber())
                 .email(signUpRequest.email())
                 .gender(signUpRequest.gender())
-                .birth(signUpRequest.birth())
+                .birth(LocalDate.parse(signUpRequest.birth()))
                 .role(signUpRequest.username().equals("admin")?ADMIN:GUEST)
                 .createdAt(clockHolder.now())
                 .build();
@@ -67,7 +67,7 @@ public class UserDomainEntity {
                 .phoneNumber(phoneNumber)
                 .email(email)
                 .gender(gender)
-                .birth(updateRequest.birth())
+                .birth(LocalDate.parse(updateRequest.birth()))
                 .role(role)
                 .authenticated(authenticated)
                 .createdAt(createdAt)
