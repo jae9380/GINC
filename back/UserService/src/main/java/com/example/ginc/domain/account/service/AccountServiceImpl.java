@@ -14,6 +14,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional
     public void signup(SignUpRequest request) {
-        accountRepository.findByUsername(request.username());
+        validationByUsername(request.username());
 
         String encryptedPassword = bCryptPasswordEncoderService.encrypt(request.password());
         UserDomainEntity userDomain = UserDomainEntity.create(request, encryptedPassword, clockHolder);
@@ -51,16 +53,26 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public UserDomainEntity getByUsername(String username) {
-        UserDomainEntity userDomainEntity = accountRepository.findByUsername(username)
+        return findByUsername(username)
                 .orElseThrow(AccountException.MemberNotFoundException::new);
-        return userDomainEntity;
     }
 
     @Override
     public UserDomainEntity getById(Long id) {
-        return findById(id);
+        return findById(id)
+                .orElseThrow(AccountException.MemberNotFoundException::new);
     }
-    private UserDomainEntity findById(long id) {
-        return accountRepository.findById(id).orElseThrow(AccountException.MemberNotFoundException::new);
+
+    private void validationByUsername(String username) {
+        findByUsername(username).ifPresent(member -> {
+            throw new AccountException.DuplicateUsernameException();
+        });
+    }
+    private Optional<UserDomainEntity> findById(long id) {
+        return accountRepository.findById(id);
+    }
+
+    private Optional<UserDomainEntity> findByUsername(String username) {
+        return accountRepository.findByUsername(username);
     }
 }
