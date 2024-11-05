@@ -8,14 +8,13 @@ import java.time.LocalDate;
 
 @Builder
 public record SignUpRequest(
-        Long id,
         String username,
         String password,
         String name,
         String phoneNumber,
         String email,
         Gender gender,
-        LocalDate birth
+        String birth
 
 ) {
 }

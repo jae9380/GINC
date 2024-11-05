@@ -52,7 +52,7 @@ public class UserDomainEntity {
                 .phoneNumber(signUpRequest.phoneNumber())
                 .email(signUpRequest.email())
                 .gender(signUpRequest.gender())
-                .birth(signUpRequest.birth())
+                .birth(LocalDate.parse(signUpRequest.birth()))
                 .role(signUpRequest.username().equals("admin")?ADMIN:GUEST)
                 .createdAt(clockHolder.now())
                 .build();
@@ -67,7 +67,7 @@ public class UserDomainEntity {
                 .phoneNumber(phoneNumber)
                 .email(email)
                 .gender(gender)
-                .birth(updateRequest.birth())
+                .birth(LocalDate.parse(updateRequest.birth()))
                 .role(role)
                 .authenticated(authenticated)
                 .createdAt(createdAt)

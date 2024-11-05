@@ -49,7 +49,7 @@ class AccountServiceImplTest {
                 .phoneNumber("01000000000")
                 .email("testEmail3@test.com")
                 .gender(Gender.MALE)
-                .birth(LocalDate.parse("1999-09-09"))
+                .birth("1999-09-09")
                 .build();
 
         when(bCryptPasswordEncoderService.encrypt(anyString())).thenAnswer(invocation -> invocation.getArgument(0));
@@ -75,7 +75,7 @@ class AccountServiceImplTest {
                 .phoneNumber("01000000000")
                 .email("testEmail3@test.com")
                 .gender(Gender.MALE)
-                .birth(LocalDate.parse("1999-09-09"))
+                .birth("1999-09-09")
                 .build();
 
 //        when
@@ -91,7 +91,7 @@ class AccountServiceImplTest {
         UpdateRequest updateRequest = UpdateRequest.builder()
                 .password("1test")
                 .name("맹구")
-                .birth(LocalDate.parse("2020-02-02"))
+                .birth("2020-02-02")
                 .build();
 
 //        when
@@ -112,7 +112,7 @@ class AccountServiceImplTest {
         UpdateRequest request = UpdateRequest.builder()
                 .password("1test")
                 .name("맹구")
-                .birth(LocalDate.parse("2020-02-02"))
+                .birth("2020-02-02")
                 .build();
 
 //        when

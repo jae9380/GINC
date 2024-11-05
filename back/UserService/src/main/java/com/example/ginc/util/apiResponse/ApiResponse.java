@@ -1,6 +1,8 @@
 package com.example.ginc.util.apiResponse;
 
 import com.example.ginc.util.Empty;
+import com.example.ginc.util.exception.CustomHttpStatus;
+import com.example.ginc.util.exception.ErrorCode;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -65,6 +67,24 @@ public class ApiResponse<T>{
                 EXCEPTION,
                 errorCode,
                 null
+        );
+    }
+    public static ApiResponse<Empty> validationException(CustomHttpStatus customHttpStatus) {
+        return new ApiResponse<>(
+                customHttpStatus.getStatusCode(),
+                customHttpStatus.getStatusMessage(),
+                ApiResultType.VALIDATION_EXCEPTION,
+                new Empty()
+        );
+    }
+
+    public static ApiResponse<Empty> customException(ErrorCode errorCode) {
+        return new ApiResponse<>(
+                errorCode.getStatus().value(),
+                errorCode.getMessage(),
+                ApiResultType.EXCEPTION,
+                errorCode.name(),
+                new Empty()
         );
     }
 }

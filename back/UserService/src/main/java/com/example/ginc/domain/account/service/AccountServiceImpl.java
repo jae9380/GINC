@@ -10,6 +10,7 @@ import com.example.ginc.domain.account.service.port.BCryptPasswordEncoderService
 import com.example.ginc.util.commone.service.port.ClockHolder;
 import com.example.ginc.util.exception.AccountException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final BCryptPasswordEncoderService bCryptPasswordEncoderService;
@@ -32,6 +34,7 @@ public class AccountServiceImpl implements AccountService {
         String encryptedPassword = bCryptPasswordEncoderService.encrypt(request.password());
         UserDomainEntity userDomain = UserDomainEntity.create(request, encryptedPassword, clockHolder);
         accountRepository.save(userDomain);
+        log.info("User {} successfully signed up.", request.username());
     }
 
     @Override

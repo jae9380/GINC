@@ -8,6 +8,6 @@ import java.time.LocalDate;
 public record UpdateRequest(
         String password,
         String name,
-        LocalDate birth
+        String birth
 ) {
 }
