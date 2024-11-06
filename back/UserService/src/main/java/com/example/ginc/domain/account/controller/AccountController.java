@@ -1,9 +1,8 @@
 package com.example.ginc.domain.account.controller;
 
-import com.example.ginc.domain.account.dto.SignInRequest;
+import com.example.ginc.domain.account.domain.SignIn;
 import com.example.ginc.domain.account.controller.response.SignInResponse;
-import com.example.ginc.domain.account.dto.SignUpRequest;
-import com.example.ginc.domain.account.dto.UpdateRequest;
+import com.example.ginc.domain.account.domain.SignUp;
 import com.example.ginc.domain.account.controller.port.AccountService;
 import com.example.ginc.util.apiResponse.ApiResponse;
 import com.example.ginc.util.Empty;
@@ -28,16 +27,16 @@ public class AccountController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/signup")
-    public ApiResponse<Empty> signup(@RequestBody @Valid SignUpRequest request) {
+    public ApiResponse<Empty> signup(@RequestBody @Valid SignUp request) {
         accountService.signup(request);
         return ApiResponse.created();
     }
 
     @PostMapping ("/login")
-    public ApiResponse<SignInResponse> login(@RequestBody @Valid SignInRequest signInRequest,
+    public ApiResponse<SignInResponse> login(@RequestBody @Valid SignIn signIn,
                                              HttpServletRequest request, HttpServletResponse response) {
-        accountService.login(signInRequest);
-        SignInResponse signInResponse = authenticationService.authenticateAndSetTokens(signInRequest.username(), request, response);
+        accountService.login(signIn);
+        SignInResponse signInResponse = authenticationService.authenticateAndSetTokens(signIn.username(), request, response);
 
         return ApiResponse.ok(signInResponse);
     }

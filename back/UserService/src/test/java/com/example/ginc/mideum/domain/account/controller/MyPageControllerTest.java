@@ -2,7 +2,7 @@ package com.example.ginc.mideum.domain.account.controller;
 
 import com.example.ginc.domain.account.controller.port.AccountService;
 import com.example.ginc.domain.account.domain.UserDomainEntity;
-import com.example.ginc.domain.account.dto.UpdateRequest;
+import com.example.ginc.domain.account.domain.Update;
 import com.example.ginc.util.auth.infrastructure.JwtTokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
@@ -45,7 +45,7 @@ class MyPageControllerTest {
         String refreshToken = jwtTokenProvider.generateToken(user, Duration.ofDays(1));
         String accessToken = jwtTokenProvider.generateToken(user, Duration.ofHours(1));
 
-        UpdateRequest request = UpdateRequest.builder()
+        Update request = Update.builder()
                 .password("testtest")
                 .name("짱구")
                 .birth("2011-11-11")

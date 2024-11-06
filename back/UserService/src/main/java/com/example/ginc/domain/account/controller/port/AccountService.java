@@ -1,17 +1,16 @@
 package com.example.ginc.domain.account.controller.port;
 
 import com.example.ginc.domain.account.domain.UserDomainEntity;
-import com.example.ginc.domain.account.dto.SignInRequest;
-import com.example.ginc.domain.account.dto.SignUpRequest;
-import com.example.ginc.domain.account.dto.UpdateRequest;
-import com.example.ginc.domain.account.infrastructure.entity.UserJpaEntity;
+import com.example.ginc.domain.account.domain.SignIn;
+import com.example.ginc.domain.account.domain.SignUp;
+import com.example.ginc.domain.account.domain.Update;
 
 public interface AccountService {
-    void signup(SignUpRequest request);
+    void signup(SignUp request);
 
-    void updateUserInfo(Long id, UpdateRequest request);
+    void updateUserInfo(Long id, Update request);
 
-    void login(SignInRequest signInRequest);
+    void login(SignIn signIn);
 
     UserDomainEntity getByUsername(String username);
 

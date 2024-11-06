@@ -1,11 +1,11 @@
-package com.example.ginc.domain.account.dto;
+package com.example.ginc.domain.account.domain;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
 @Builder
-public record SignInRequest(
+public record SignIn(
         @NotBlank(message = "아이디는 필수 항목입니다.")
         @Size(min = 4, max = 20, message = "아이디는 최소 4자 ~ 최대 20자 이내로 입력해주세요.")
         String username,

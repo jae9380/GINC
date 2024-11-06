@@ -1,10 +1,8 @@
 package com.example.ginc.util.auth.infrastructure;
 
 import com.example.ginc.domain.account.domain.UserDomainEntity;
-import com.example.ginc.domain.account.infrastructure.entity.UserJpaEntity;
-import com.example.ginc.domain.account.infrastructure.AccountJpaRepository;
 import com.example.ginc.domain.account.service.port.AccountRepository;
-import com.example.ginc.util.exception.AccountException;
+import com.example.ginc.domain.account.exception.AccountException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

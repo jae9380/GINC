@@ -6,8 +6,8 @@ import com.example.ginc.domain.account.controller.port.AccountService;
 import com.example.ginc.domain.account.controller.port.AuthenticationService;
 import com.example.ginc.domain.account.controller.response.SignInResponse;
 import com.example.ginc.domain.account.domain.UserDomainEntity;
-import com.example.ginc.domain.account.dto.SignInRequest;
-import com.example.ginc.domain.account.dto.SignUpRequest;
+import com.example.ginc.domain.account.domain.SignIn;
+import com.example.ginc.domain.account.domain.SignUp;
 import com.example.ginc.domain.account.infrastructure.entity.type.Gender;
 import com.example.ginc.domain.account.service.port.BCryptPasswordEncoderService;
 import com.example.ginc.util.auth.CookieUtil;
@@ -19,22 +19,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -66,7 +59,7 @@ class AccountControllerTest {
     @Transactional
     void 사용자의_신규_회원_등록() throws Exception{
 //        given
-        SignUpRequest request = SignUpRequest.builder()
+        SignUp request = SignUp.builder()
                 .username("tester3")
                 .password("test12341")
                 .name("철수")
@@ -94,7 +87,7 @@ class AccountControllerTest {
     @Test
     void 등록된_사용자의_로그인() throws Exception{
 //        given
-        SignInRequest request = SignInRequest.builder()
+        SignIn request = SignIn.builder()
                         .username("tester1")
                         .password("test1234")
                         .build();
@@ -131,7 +124,7 @@ class AccountControllerTest {
     @Test
     void 등록된_비밀번호와_일치하지_않는_값으로_로그인() throws Exception{
 //        given
-        SignInRequest request = SignInRequest.builder()
+        SignIn request = SignIn.builder()
                 .username("tester1")
                 .password("test123422222")
                 .build();

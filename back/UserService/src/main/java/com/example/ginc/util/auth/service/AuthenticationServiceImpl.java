@@ -7,7 +7,7 @@ import com.example.ginc.domain.account.service.port.AccountRepository;
 import com.example.ginc.util.auth.CookieUtil;
 import com.example.ginc.util.auth.infrastructure.JwtTokenProvider;
 import com.example.ginc.util.auth.service.port.RefreshTokenService;
-import com.example.ginc.util.exception.AccountException;
+import com.example.ginc.domain.account.exception.AccountException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

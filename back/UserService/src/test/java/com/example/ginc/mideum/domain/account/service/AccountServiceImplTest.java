@@ -2,26 +2,20 @@ package com.example.ginc.mideum.domain.account.service;
 
 import com.example.ginc.domain.account.controller.port.AccountService;
 import com.example.ginc.domain.account.domain.UserDomainEntity;
-import com.example.ginc.domain.account.dto.SignInRequest;
-import com.example.ginc.domain.account.dto.SignUpRequest;
-import com.example.ginc.domain.account.dto.UpdateRequest;
-import com.example.ginc.domain.account.infrastructure.BCryptPasswordEncoderServiceImpl;
+import com.example.ginc.domain.account.domain.SignIn;
+import com.example.ginc.domain.account.domain.SignUp;
+import com.example.ginc.domain.account.domain.Update;
 import com.example.ginc.domain.account.infrastructure.entity.type.Gender;
 import com.example.ginc.domain.account.service.port.BCryptPasswordEncoderService;
-import com.example.ginc.mock.TestClockHolder;
-import com.example.ginc.util.exception.AccountException;
+import com.example.ginc.domain.account.exception.AccountException;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 
-import java.time.LocalDate;
-
 import static org.assertj.core.api.AssertionsForClassTypes.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
@@ -42,7 +36,7 @@ class AccountServiceImplTest {
     @Test
     void signup으로_신규_유저_생성() {
 //        given
-        SignUpRequest request = SignUpRequest.builder()
+        SignUp request = SignUp.builder()
                 .username("tester3")
                 .password("test1234")
                 .name("철수")
@@ -68,7 +62,7 @@ class AccountServiceImplTest {
     @Test
     void signup으로_중복돤_Username으로_신규_유저_생성_시_예외_발생() {
 //        given
-        SignUpRequest request = SignUpRequest.builder()
+        SignUp request = SignUp.builder()
                 .username("tester2")
                 .password("test1234")
                 .name("철수")
@@ -88,14 +82,14 @@ class AccountServiceImplTest {
     @Test
     void updateUserInfo로_유저의_정보_변경() {
 //        given
-        UpdateRequest updateRequest = UpdateRequest.builder()
+        Update update = Update.builder()
                 .password("1test")
                 .name("맹구")
                 .birth("2020-02-02")
                 .build();
 
 //        when
-        accountService.updateUserInfo(1L,updateRequest);
+        accountService.updateUserInfo(1L, update);
 
 //        then
         UserDomainEntity result = accountService.getById(1L);
@@ -109,7 +103,7 @@ class AccountServiceImplTest {
     @Test
     void updateUserInfo로_없는_유저의_정보_변경_시_예외_발생() {
 //        given
-        UpdateRequest request = UpdateRequest.builder()
+        Update request = Update.builder()
                 .password("1test")
                 .name("맹구")
                 .birth("2020-02-02")
@@ -125,7 +119,7 @@ class AccountServiceImplTest {
     @Test
     void login_시_틀린_아이디로_예외_발생() {
 //        given
-        SignInRequest request = SignInRequest.builder()
+        SignIn request = SignIn.builder()
                 .username("tester12")
                 .password("test1234")
                 .build();
@@ -140,7 +134,7 @@ class AccountServiceImplTest {
     @Test
     void login_시_틀린_비밀번호로_예외_발생() {
 //        given
-        SignInRequest request = SignInRequest.builder()
+        SignIn request = SignIn.builder()
                 .username("tester1")
                 .password("test12345")
                 .build();
@@ -155,7 +149,7 @@ class AccountServiceImplTest {
     @Test
     void login_옳은_정보로_시도() {
 //        given
-        SignInRequest request = SignInRequest.builder()
+        SignIn request = SignIn.builder()
                 .username("tester1")
                 .password("test1234")
                 .build();

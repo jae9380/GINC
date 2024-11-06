@@ -1,11 +1,9 @@
-package com.example.ginc.domain.account.dto;
+package com.example.ginc.domain.account.domain;
 
 import lombok.Builder;
 
-import java.time.LocalDate;
-
 @Builder
-public record UpdateRequest(
+public record Update(
         String password,
         String name,
         String birth

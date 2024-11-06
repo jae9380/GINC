@@ -2,16 +2,15 @@ package com.example.ginc.domain.account.service;
 
 import com.example.ginc.domain.account.controller.port.AccountService;
 import com.example.ginc.domain.account.domain.UserDomainEntity;
-import com.example.ginc.domain.account.dto.SignInRequest;
-import com.example.ginc.domain.account.dto.SignUpRequest;
-import com.example.ginc.domain.account.dto.UpdateRequest;
+import com.example.ginc.domain.account.domain.SignIn;
+import com.example.ginc.domain.account.domain.SignUp;
+import com.example.ginc.domain.account.domain.Update;
 import com.example.ginc.domain.account.service.port.AccountRepository;
 import com.example.ginc.domain.account.service.port.BCryptPasswordEncoderService;
 import com.example.ginc.util.commone.service.port.ClockHolder;
-import com.example.ginc.util.exception.AccountException;
+import com.example.ginc.domain.account.exception.AccountException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +27,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public void signup(SignUpRequest request) {
+    public void signup(SignUp request) {
         validationByUsername(request.username());
 
         String encryptedPassword = bCryptPasswordEncoderService.encrypt(request.password());
@@ -39,14 +38,14 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public void updateUserInfo(Long id, UpdateRequest request) {
+    public void updateUserInfo(Long id, Update request) {
         UserDomainEntity userDomainEntity = getById(id);
         userDomainEntity = userDomainEntity.update(request, clockHolder);
         accountRepository.save( userDomainEntity);
     }
 
     @Override
-    public void login(SignInRequest request) {
+    public void login(SignIn request) {
         UserDomainEntity userDomainEntity = getByUsername(request.username());
 
         if (!bCryptPasswordEncoderService.matches(request.password(), userDomainEntity.getPassword())) {

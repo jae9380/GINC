@@ -2,7 +2,7 @@ package com.example.ginc.domain.account.controller;
 
 import com.example.ginc.domain.account.controller.port.AccountService;
 import com.example.ginc.domain.account.controller.response.MyProfileResponse;
-import com.example.ginc.domain.account.dto.UpdateRequest;
+import com.example.ginc.domain.account.domain.Update;
 import com.example.ginc.util.Empty;
 import com.example.ginc.util.apiResponse.ApiResponse;
 import com.example.ginc.util.auth.MemberDetails;
@@ -24,7 +24,7 @@ public class MyPageController {
 
     @PutMapping
     public ApiResponse<Empty> updateInfo(@AuthenticationPrincipal MemberDetails memberDetails,
-                                         @RequestBody @Valid UpdateRequest request) {
+                                         @RequestBody @Valid Update request) {
         accountService.updateUserInfo(memberDetails.getId(), request);
         return ApiResponse.noContent();
     }

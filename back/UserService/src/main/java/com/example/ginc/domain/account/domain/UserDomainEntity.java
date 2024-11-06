@@ -1,8 +1,5 @@
 package com.example.ginc.domain.account.domain;
 
-import com.example.ginc.domain.account.dto.SignInRequest;
-import com.example.ginc.domain.account.dto.SignUpRequest;
-import com.example.ginc.domain.account.dto.UpdateRequest;
 import com.example.ginc.domain.account.infrastructure.entity.type.Gender;
 import com.example.ginc.domain.account.infrastructure.entity.type.Role;
 import com.example.ginc.util.commone.service.port.ClockHolder;
@@ -44,30 +41,30 @@ public class UserDomainEntity {
         this.modifiedAt = modifiedAt;
     }
 
-    public static UserDomainEntity create(SignUpRequest signUpRequest, String password, ClockHolder clockHolder) {
+    public static UserDomainEntity create(SignUp signUp, String password, ClockHolder clockHolder) {
         return UserDomainEntity.builder()
-                .username(signUpRequest.username())
+                .username(signUp.username())
                 .password(password)
-                .name(signUpRequest.name())
-                .phoneNumber(signUpRequest.phoneNumber())
-                .email(signUpRequest.email())
-                .gender(signUpRequest.gender())
-                .birth(LocalDate.parse(signUpRequest.birth()))
-                .role(signUpRequest.username().equals("admin")?ADMIN:GUEST)
+                .name(signUp.name())
+                .phoneNumber(signUp.phoneNumber())
+                .email(signUp.email())
+                .gender(signUp.gender())
+                .birth(LocalDate.parse(signUp.birth()))
+                .role(signUp.username().equals("admin")?ADMIN:GUEST)
                 .createdAt(clockHolder.now())
                 .build();
     }
 
-    public UserDomainEntity update(UpdateRequest updateRequest, ClockHolder clockHolder) {
+    public UserDomainEntity update(Update update, ClockHolder clockHolder) {
         return UserDomainEntity.builder()
                 .id(id)
                 .username(username)
-                .password(updateRequest.password())
-                .name(updateRequest.name())
+                .password(update.password())
+                .name(update.name())
                 .phoneNumber(phoneNumber)
                 .email(email)
                 .gender(gender)
-                .birth(LocalDate.parse(updateRequest.birth()))
+                .birth(LocalDate.parse(update.birth()))
                 .role(role)
                 .authenticated(authenticated)
                 .createdAt(createdAt)

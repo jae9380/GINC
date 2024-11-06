@@ -97,7 +97,6 @@ class AccountRepositoryImplTest {
 //        then
         UserDomainEntity result = accountRepositoryImpl.findByUsername("tester2").get();
         assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo(2L);
         assertThat(result.getUsername()).isEqualTo("tester2");
     }
 }

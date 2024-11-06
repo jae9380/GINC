@@ -1,18 +1,14 @@
-package com.example.ginc.util.exception;
+package com.example.ginc.domain.account.exception;
+
+import com.example.ginc.util.exception.ErrorCode;
+import com.example.ginc.util.exception.GincException;
 
 import static com.example.ginc.util.exception.ErrorCode.*;
 
-public class AccountException extends RuntimeException {
-
-    private final ErrorCode errorCode;
+public class AccountException extends GincException {
 
     public AccountException(ErrorCode e) {
-        super(e.getMessage());
-        this.errorCode = e;
-    }
-
-    public ErrorCode getErrorCode() {
-        return errorCode;
+        super(e);
     }
 
     public static class DuplicateUsernameException extends AccountException {

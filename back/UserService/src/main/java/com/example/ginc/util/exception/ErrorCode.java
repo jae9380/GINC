@@ -1,9 +1,11 @@
 package com.example.ginc.util.exception;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @Getter
+@RequiredArgsConstructor
 public enum ErrorCode {
     DUPLICATE_USERNAME(HttpStatus.BAD_REQUEST, "이미 존재하는 아이디 입니다."),
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "일치하는 회원정보가 없습니다."),
@@ -11,9 +13,4 @@ public enum ErrorCode {
 
     private final HttpStatus status;
     private final String message;
-
-    ErrorCode(HttpStatus status, String message) {
-        this.status = status;
-        this.message = message;
-    }
 }
