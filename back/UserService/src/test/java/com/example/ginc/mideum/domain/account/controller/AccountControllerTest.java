@@ -104,7 +104,7 @@ class AccountControllerTest {
 
 //        when
 //        then
-        mockMvc.perform(post("/api/account/login")
+        mockMvc.perform(post("/api/account/signin")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andDo(print())
@@ -133,7 +133,7 @@ class AccountControllerTest {
 
 //        when
 //        then
-        mockMvc.perform(post("/api/account/login")
+        mockMvc.perform(post("/api/account/signin")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())

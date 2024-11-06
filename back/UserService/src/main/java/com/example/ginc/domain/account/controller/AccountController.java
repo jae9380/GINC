@@ -32,7 +32,7 @@ public class AccountController {
         return ApiResponse.created();
     }
 
-    @PostMapping ("/login")
+    @PostMapping ("/signin")
     public ApiResponse<SignInResponse> login(@RequestBody @Valid SignIn signIn,
                                              HttpServletRequest request, HttpServletResponse response) {
         accountService.login(signIn);

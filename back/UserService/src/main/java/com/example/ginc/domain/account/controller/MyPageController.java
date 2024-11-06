@@ -28,4 +28,6 @@ public class MyPageController {
         accountService.updateUserInfo(memberDetails.getId(), request);
         return ApiResponse.noContent();
     }
+
+//    TODO - 회원가입 시 인증 이메일 발송 및 이메일 인증 로직 추가
 }
