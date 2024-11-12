@@ -1,5 +1,7 @@
 package com.example.ginc.domain.garage.domain;
 
+import com.example.ginc.domain.garage.infrastructure.entity.type.FuelType;
+import com.example.ginc.domain.garage.infrastructure.entity.type.Manufacturer;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -9,7 +11,11 @@ import java.time.LocalDate;
 public class GarageDomainEntity {
 
     private final Long id;
-	private final Long car_id;
+	private final Manufacturer manufacturer;
+	private final String modelName;
+	private final String subModelName;
+	private final String manufactureDate;
+	private final FuelType fuelType;
 	private final Long totalDrivingDistance;  //  총 주행 거리
 	private final Long totalFuelCost;  //  총 주유 금액
 	private final Long totalFuelConsumption;  //  총 연료 소모량
@@ -24,13 +30,18 @@ public class GarageDomainEntity {
 	private final Long lastChangeBatteryDate;  //  배터리 교체 날짜
 
 	@Builder
-    public GarageDomainEntity(Long id, Long car_id, Long totalDrivingDistance,
-							  Long totalFuelCost, Long totalFuelConsumption, LocalDate lastRefuelDate,
-							  Long lastRefuelCost, Long lastDrivingDistance, Long lastFuelConsumption,
-							  Long lastEngineOilChange, Long lastTransmissionOilChange, Long lastSparkPlugAndCableReplacement,
-							  Long lastBrakeFluidChange, Long lastChangeBatteryDate) {
+    public GarageDomainEntity(Long id, Manufacturer manufacturer, String modelName,
+							  String subModelName, String manufactureDate, FuelType fuelType,
+							  Long totalDrivingDistance, Long totalFuelCost, Long totalFuelConsumption,
+							  LocalDate lastRefuelDate, Long lastRefuelCost, Long lastDrivingDistance,
+							  Long lastFuelConsumption, Long lastEngineOilChange, Long lastTransmissionOilChange,
+							  Long lastSparkPlugAndCableReplacement, Long lastBrakeFluidChange, Long lastChangeBatteryDate) {
         this.id = id;
-        this.car_id = car_id;
+		this.manufacturer = manufacturer;
+		this.modelName = modelName;
+		this.subModelName = subModelName;
+		this.manufactureDate = manufactureDate;
+		this.fuelType = fuelType;
         this.totalDrivingDistance = totalDrivingDistance;
         this.totalFuelCost = totalFuelCost;
         this.totalFuelConsumption = totalFuelConsumption;
@@ -44,4 +55,14 @@ public class GarageDomainEntity {
         this.lastBrakeFluidChange = lastBrakeFluidChange;
         this.lastChangeBatteryDate = lastChangeBatteryDate;
     }
+
+	public static GarageDomainEntity register(RegisterVehicle request) {
+		return GarageDomainEntity.builder()
+				.manufacturer(request.manufacturer())
+				.modelName(request.modelName())
+				.subModelName(request.subModelName())
+				.manufactureDate(request.manufactureDate())
+				.fuelType(request.fuelType())
+				.build();
+	}
 }

@@ -1,7 +1,8 @@
 package com.example.ginc.domain.garage.infrastructure.entity;
 
-import com.example.ginc.domain.garage.domain.CarDomainEntity;
 import com.example.ginc.domain.garage.domain.GarageDomainEntity;
+import com.example.ginc.domain.garage.infrastructure.entity.type.FuelType;
+import com.example.ginc.domain.garage.infrastructure.entity.type.Manufacturer;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -18,8 +19,18 @@ public class GarageJpaEntity {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	@Column(name = "car_id", nullable = false)
-	private Long car_id;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "manufacturer")
+	private Manufacturer manufacturer;
+	@Column(name = "modelName")
+	private String modelName;
+	@Column(name = "subModelName")
+	private String subModelName;
+	@Column(name = "manufactureDate")
+	private String manufactureDate;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "fuelType")
+	private FuelType fuelType;
 	@Column(name = "totalDrivingDistance")
 	private Long totalDrivingDistance;  //  총 주행 거리
 	@Column(name = "totalFuelCost")
@@ -48,7 +59,11 @@ public class GarageJpaEntity {
 	public static GarageJpaEntity from(GarageDomainEntity entity) {
 		GarageJpaEntity garageJpaEntity = new GarageJpaEntity();
 		garageJpaEntity.id=entity.getId();
-		garageJpaEntity.car_id=entity.getId();
+		garageJpaEntity.manufacturer=entity.getManufacturer();
+		garageJpaEntity.modelName=entity.getModelName();
+		garageJpaEntity.subModelName=entity.getSubModelName();
+		garageJpaEntity.manufactureDate=entity.getManufactureDate();
+		garageJpaEntity.fuelType=entity.getFuelType();
 		garageJpaEntity.totalDrivingDistance=entity.getTotalDrivingDistance();
 		garageJpaEntity.totalFuelCost=entity.getTotalFuelCost();
 		garageJpaEntity.totalFuelConsumption=entity.getTotalFuelConsumption();
@@ -67,7 +82,11 @@ public class GarageJpaEntity {
 	public GarageDomainEntity to() {
 		return GarageDomainEntity.builder()
 				.id(id)
-				.car_id(car_id)
+				.manufacturer(manufacturer)
+				.modelName(modelName)
+				.subModelName(subModelName)
+				.manufactureDate(manufactureDate)
+				.fuelType(fuelType)
 				.totalDrivingDistance(totalDrivingDistance)
 				.totalFuelCost(totalFuelCost)
 				.totalFuelConsumption(totalFuelConsumption)
