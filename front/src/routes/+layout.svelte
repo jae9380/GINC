@@ -1,53 +1,29 @@
-<script>
-	import Header from './Header.svelte';
-	import '../app.css';
+<script lang="ts">
+	import '../tailwind.css';
 </script>
 
-<div class="app">
-	<Header />
+<div class="flex flex-col min-h-screen">
+	<!-- 네비게이션 바 -->
+	<header class="bg-blue-500 text-white p-4 fixed top-0 left-0 w-full z-10">
+	  <nav class="flex items-center justify-between px-4 py-5 shadow-md">
+		<div class="flex items-center">
+		  <a href="/home" class="text-3xl">GINC</a>
+		</div>
+	  </nav>
+	</header>
+  
+	<!-- 메인 컨텐츠 -->
+	<main class="flex-1 mt-[80px] mb-[60px]">
+	  <!-- mt-[80px]: 네비게이션 바 높이만큼 마진 추가 -->
+	  <!-- mb-[60px]: 푸터 높이만큼 마진 추가 -->
 
-	<main>
-		<slot />
+  	  <slot></slot> <!-- children() 대신 slot을 사용 -->
 	</main>
-
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+  
+	<!-- 푸터 -->
+	<footer class="bg-gray-800 text-white p-4 fixed bottom-0 left-0 w-full">
+	  <p class="text-center">
+		&copy; {new Date().getFullYear()} My Application. All rights reserved.
+	  </p>
 	</footer>
-</div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>
+  </div>
