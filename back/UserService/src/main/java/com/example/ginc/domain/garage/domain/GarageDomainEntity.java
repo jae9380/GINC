@@ -40,5 +40,19 @@ public class GarageDomainEntity {
         this.lastChangeBatteryDate = lastChangeBatteryDate;
     }
 
-
+	public GarageDomainEntity refueling(Refueling refueling) {
+		return GarageDomainEntity.builder()
+				.id(id)
+				.user_id(user_id)
+				.car_id(car_id)
+				.totalDrivingDistance(totalDrivingDistance==null?refueling.segmentTotalDistance():totalDrivingDistance+refueling.segmentTotalDistance())
+				.totalFuelCost(totalFuelCost==null?refueling.totalRefuelingCost():totalFuelCost+refueling.totalRefuelingCost())
+				.totalFuelConsumption(totalFuelConsumption==null?refueling.refuelingVolume():totalFuelConsumption+refueling.refuelingVolume())
+				.lastEngineOilChange(lastEngineOilChange)
+				.lastTransmissionOilChange(lastTransmissionOilChange)
+				.lastSparkPlugAndCableReplacement(lastSparkPlugAndCableReplacement)
+				.lastBrakeFluidChange(lastBrakeFluidChange)
+				.lastChangeBatteryDate(lastChangeBatteryDate)
+				.build();
+	}
 }

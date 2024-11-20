@@ -6,6 +6,8 @@ import com.example.ginc.domain.garage.service.port.GarageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class GarageRepositoryImpl implements GarageRepository {
@@ -14,5 +16,10 @@ public class GarageRepositoryImpl implements GarageRepository {
     @Override
     public GarageDomainEntity save(GarageDomainEntity entity) {
         return garageJpaRepository.save(GarageJpaEntity.from(entity)).to();
+    }
+
+    @Override
+    public Optional<GarageDomainEntity> findByUserId(Long user_id) {
+        return garageJpaRepository.findByUserId(user_id).map(GarageJpaEntity::to);
     }
 }

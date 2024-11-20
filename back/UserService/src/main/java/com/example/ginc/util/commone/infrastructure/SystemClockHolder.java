@@ -12,4 +12,9 @@ public class SystemClockHolder implements ClockHolder {
     public LocalDate now() {
         return LocalDate.now(Clock.systemUTC());
     }
+    // TODO: LocalDate -> Long 타입으러 변경하기
+    @Override
+    public long millis() {
+        return Clock.systemUTC().millis();
+    }
 }

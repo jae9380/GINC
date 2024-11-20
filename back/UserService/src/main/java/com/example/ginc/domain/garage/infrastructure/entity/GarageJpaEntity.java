@@ -1,14 +1,10 @@
 package com.example.ginc.domain.garage.infrastructure.entity;
 
 import com.example.ginc.domain.garage.domain.GarageDomainEntity;
-import com.example.ginc.domain.garage.infrastructure.entity.type.FuelType;
-import com.example.ginc.domain.garage.infrastructure.entity.type.Manufacturer;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "garage")
@@ -19,10 +15,10 @@ public class GarageJpaEntity {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	@Column(name = "user_id")
-	private Long user_id;
-	@Column(name = "car_id")
-	private Long car_id;
+	@Column(name = "userId")
+	private Long userId;
+	@Column(name = "carId")
+	private Long carId;
 	@Column(name = "totalDrivingDistance")
 	private Long totalDrivingDistance;  //  총 주행 거리
 	@Column(name = "totalFuelCost")
@@ -43,8 +39,8 @@ public class GarageJpaEntity {
 	public static GarageJpaEntity from(GarageDomainEntity entity) {
 		GarageJpaEntity garageJpaEntity = new GarageJpaEntity();
 		garageJpaEntity.id=entity.getId();
-		garageJpaEntity.user_id=entity.getUser_id();
-		garageJpaEntity.car_id = entity.getCar_id();
+		garageJpaEntity.userId =entity.getUser_id();
+		garageJpaEntity.carId = entity.getCar_id();
 		garageJpaEntity.totalDrivingDistance=entity.getTotalDrivingDistance();
 		garageJpaEntity.totalFuelCost=entity.getTotalFuelCost();
 		garageJpaEntity.totalFuelConsumption=entity.getTotalFuelConsumption();
@@ -59,8 +55,8 @@ public class GarageJpaEntity {
 	public GarageDomainEntity to() {
 		return GarageDomainEntity.builder()
 				.id(id)
-				.user_id(user_id)
-				.car_id(car_id)
+				.user_id(userId)
+				.car_id(carId)
 				.totalDrivingDistance(totalDrivingDistance)
 				.totalFuelCost(totalFuelCost)
 				.totalFuelConsumption(totalFuelConsumption)

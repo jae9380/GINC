@@ -1,9 +1,7 @@
 package com.example.ginc.domain.garage.infrastructure.entity;
 
-import com.example.ginc.domain.garage.domain.CarDomainEntity;
 import com.example.ginc.domain.garage.domain.RefuelDomainEntity;
 import com.example.ginc.domain.garage.infrastructure.entity.type.FuelType;
-import com.example.ginc.domain.garage.infrastructure.entity.type.Manufacturer;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -18,8 +16,8 @@ public class RefuelJpaEntity {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	@Column(name = "car_id")
-	private Long car_id;
+	@Column(name = "carId")
+	private Long carId;
 	@Column(name = "segmentTotalDistance")
 	private int segmentTotalDistance;
 	@Column(name = "totalRefuelingCost")
@@ -37,7 +35,7 @@ public class RefuelJpaEntity {
 	public static RefuelJpaEntity from(RefuelDomainEntity entity) {
 		RefuelJpaEntity refuelJpaEntity = new RefuelJpaEntity();
 		refuelJpaEntity.id=entity.getId();
-		refuelJpaEntity.car_id= entity.getCar_id();
+		refuelJpaEntity.carId = entity.getCar_id();
 		refuelJpaEntity.segmentTotalDistance=entity.getSegmentTotalDistance();
 		refuelJpaEntity.totalRefuelingCost=entity.getTotalRefuelingCost();
 		refuelJpaEntity.fuelType=entity.getFuelType();
@@ -50,7 +48,7 @@ public class RefuelJpaEntity {
 	public RefuelDomainEntity to() {
 		return RefuelDomainEntity.builder()
 				.id(id)
-				.car_id(car_id)
+				.car_id(carId)
 				.segmentTotalDistance(segmentTotalDistance)
 				.totalRefuelingCost(totalRefuelingCost)
 				.fuelType(fuelType)

@@ -1,6 +1,7 @@
 package com.example.ginc.domain.garage.domain;
 
 import com.example.ginc.domain.garage.infrastructure.entity.type.FuelType;
+import com.example.ginc.util.commone.service.port.ClockHolder;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -28,5 +29,17 @@ public class RefuelDomainEntity {
         this.costPerLiter = costPerLiter;
         this.refuelingVolume = refuelingVolume;
         this.refuelingAt = refuelingAt;
+    }
+
+    public static RefuelDomainEntity refueling(Refueling request, Long car_id, ClockHolder clockHolder) {
+        return RefuelDomainEntity.builder()
+                .car_id(car_id)
+                .segmentTotalDistance(request.segmentTotalDistance())
+                .totalRefuelingCost(request.totalRefuelingCost())
+                .fuelType(request.fuelType())
+                .costPerLiter(request.costPerLiter())
+                .refuelingVolume(request.refuelingVolume())
+                .refuelingAt(clockHolder.millis())
+                .build();
     }
 }
