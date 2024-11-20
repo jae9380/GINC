@@ -19,6 +19,8 @@ public class GarageJpaEntity {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	@Column(name = "user_id")
+	private Long user_id;
 	@Column(name = "car_id")
 	private Long car_id;
 	@Column(name = "totalDrivingDistance")
@@ -41,6 +43,7 @@ public class GarageJpaEntity {
 	public static GarageJpaEntity from(GarageDomainEntity entity) {
 		GarageJpaEntity garageJpaEntity = new GarageJpaEntity();
 		garageJpaEntity.id=entity.getId();
+		garageJpaEntity.user_id=entity.getUser_id();
 		garageJpaEntity.car_id = entity.getCar_id();
 		garageJpaEntity.totalDrivingDistance=entity.getTotalDrivingDistance();
 		garageJpaEntity.totalFuelCost=entity.getTotalFuelCost();
@@ -56,6 +59,7 @@ public class GarageJpaEntity {
 	public GarageDomainEntity to() {
 		return GarageDomainEntity.builder()
 				.id(id)
+				.user_id(user_id)
 				.car_id(car_id)
 				.totalDrivingDistance(totalDrivingDistance)
 				.totalFuelCost(totalFuelCost)

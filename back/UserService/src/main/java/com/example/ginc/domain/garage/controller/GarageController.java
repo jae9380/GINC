@@ -20,7 +20,7 @@ public class GarageController {
     @PostMapping
     public ApiResponse<Empty> registerVehicle (@AuthenticationPrincipal MemberDetails memberDetails,
                                                @RequestBody RegisterVehicle request) {
-        garageService.vehicleRegistration(request);
+        garageService.vehicleRegistration(request, memberDetails.getId());
     return ApiResponse.noContent();
     }
 }

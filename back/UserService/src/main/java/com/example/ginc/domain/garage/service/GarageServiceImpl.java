@@ -20,10 +20,11 @@ public class GarageServiceImpl implements GarageService {
 
     @Override
     @Transactional
-    public void vehicleRegistration(RegisterVehicle request) {
+    public void vehicleRegistration(RegisterVehicle request, Long user_id) {
         CarDomainEntity entity = carRepository.save(CarDomainEntity.register(request));
 
         garageRepository.save(GarageDomainEntity.builder()
+                .user_id(user_id)
                 .car_id(entity.getId())
                 .build());
     }

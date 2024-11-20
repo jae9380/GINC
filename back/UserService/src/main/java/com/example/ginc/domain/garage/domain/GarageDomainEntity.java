@@ -11,6 +11,7 @@ import java.time.LocalDate;
 public class GarageDomainEntity {
 
     private final Long id;
+	private final Long user_id;
 	private final Long car_id;
 	private final Long totalDrivingDistance;  //  총 주행 거리
 	private final Long totalFuelCost;  //  총 주유 금액
@@ -22,10 +23,12 @@ public class GarageDomainEntity {
 	private final Long lastChangeBatteryDate;  //  배터리 교체 날짜
 
 	@Builder
-    public GarageDomainEntity(Long id, Long totalDrivingDistance, Long totalFuelCost, Long car_id,
-							  Long totalFuelConsumption, Long lastEngineOilChange, Long lastTransmissionOilChange,
-							  Long lastSparkPlugAndCableReplacement, Long lastBrakeFluidChange, Long lastChangeBatteryDate) {
+    public GarageDomainEntity(Long id, Long user_id, Long car_id,
+							  Long totalDrivingDistance, Long totalFuelCost, Long totalFuelConsumption,
+							  Long lastEngineOilChange, Long lastTransmissionOilChange, Long lastSparkPlugAndCableReplacement,
+							  Long lastBrakeFluidChange, Long lastChangeBatteryDate) {
         this.id = id;
+		this.user_id = user_id;
 		this.car_id = car_id;
         this.totalDrivingDistance = totalDrivingDistance;
         this.totalFuelCost = totalFuelCost;
