@@ -4,7 +4,9 @@ import com.example.ginc.domain.garage.controller.port.GarageService;
 import com.example.ginc.domain.garage.domain.*;
 import com.example.ginc.domain.garage.exception.GarageException;
 import com.example.ginc.domain.garage.service.port.CarRepository;
+import com.example.ginc.domain.garage.service.port.CarService;
 import com.example.ginc.domain.garage.service.port.GarageRepository;
+import com.example.ginc.util.commone.service.port.ClockHolder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,16 +18,17 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class GarageServiceImpl implements GarageService {
     private final GarageRepository garageRepository;
-    private final CarRepository carRepository;
+    private final CarService carService;
+    private final ClockHolder clockHolder;
 
     @Override
     @Transactional
-    public void vehicleRegistration(RegisterVehicle request, Long user_id) {
-        CarDomainEntity entity = carRepository.save(CarDomainEntity.register(request));
+    public void garageRegistration(RegisterVehicle request, Long user_id) {
+        Long car_id = carService.vehicleRegistration(request);
 
         garageRepository.save(GarageDomainEntity.builder()
                 .user_id(user_id)
-                .car_id(entity.getId())
+                .car_id(car_id)
                 .build());
     }
 
@@ -36,6 +39,15 @@ public class GarageServiceImpl implements GarageService {
 
         garageRepository.save(entity);
         return entity.getCar_id();
+    }
+
+    @Override
+    @Transactional
+    public void registrationOfInfo(RegisterConsumables request, Long user_id) {
+        GarageDomainEntity entity = getByUser_Id(user_id);
+
+        entity = entity.registerConsumables(request, clockHolder);
+        garageRepository.save(entity);
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.ginc.domain.garage.domain;
 
+import com.example.ginc.util.commone.service.port.ClockHolder;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -51,6 +52,23 @@ public class GarageDomainEntity {
 				.lastSparkPlugAndCableReplacement(lastSparkPlugAndCableReplacement)
 				.lastBrakeFluidChange(lastBrakeFluidChange)
 				.lastChangeBatteryDate(lastChangeBatteryDate)
+				.build();
+	}
+
+	public GarageDomainEntity registerConsumables(RegisterConsumables request, ClockHolder clockHolder) {
+		return GarageDomainEntity.builder()
+				.id(id)
+				.user_id(user_id)
+				.car_id(car_id)
+				.totalDrivingDistance(totalDrivingDistance)
+				.serviceDrivingDistance(serviceDrivingDistance)
+				.serviceTotalFuelCost(serviceTotalFuelCost)
+				.serviceTotalFuelConsumption(serviceTotalFuelConsumption)
+				.lastEngineOilChange(request.lastEngineOilChange())
+				.lastTransmissionOilChange(request.lastTransmissionOilChange())
+				.lastSparkPlugAndCableReplacement(request.lastSparkPlugAndCableReplacement())
+				.lastBrakeFluidChange(request.lastBrakeFluidChange())
+				.lastChangeBatteryDate(clockHolder.parseDateToMillis(request.lastChangeBatteryDate()))
 				.build();
 	}
 }

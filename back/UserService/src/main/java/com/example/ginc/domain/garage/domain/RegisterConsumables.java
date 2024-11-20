@@ -1,10 +1,10 @@
 package com.example.ginc.domain.garage.domain;
 
-public record RegisterInfo(
+public record RegisterConsumables(
         Long lastEngineOilChange,
         Long lastTransmissionOilChange,
         Long lastSparkPlugAndCableReplacement,
         Long lastBrakeFluidChange,
-        Long lastChangeBatteryDate
+        String lastChangeBatteryDate // "yyyy-MM-dd" 형식
 ) {
 }

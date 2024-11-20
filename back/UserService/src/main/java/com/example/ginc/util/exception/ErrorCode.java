@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 @Getter
 @RequiredArgsConstructor
 public enum ErrorCode {
+    // Global
+    BAD_INPUT_FORMAT(HttpStatus.BAD_REQUEST, "입력 형식이 틀렸습니다."),
+
     // Account
     DUPLICATE_USERNAME(HttpStatus.BAD_REQUEST, "이미 존재하는 아이디 입니다."),
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "일치하는 회원정보가 없습니다."),

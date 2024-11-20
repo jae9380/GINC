@@ -2,6 +2,7 @@ package com.example.ginc.domain.garage.controller;
 
 import com.example.ginc.domain.garage.controller.port.GarageService;
 import com.example.ginc.domain.garage.domain.Refueling;
+import com.example.ginc.domain.garage.domain.RegisterConsumables;
 import com.example.ginc.domain.garage.domain.RegisterVehicle;
 import com.example.ginc.util.Empty;
 import com.example.ginc.util.apiResponse.ApiResponse;
@@ -17,10 +18,18 @@ import org.springframework.web.bind.annotation.*;
 public class GarageController {
     private final GarageService garageService;
 
-    @PostMapping
-    public ApiResponse<Empty> registerVehicle (@AuthenticationPrincipal MemberDetails memberDetails,
+    @PostMapping("/car")
+    public ApiResponse<Empty> registerGarage (@AuthenticationPrincipal MemberDetails memberDetails,
                                                @RequestBody RegisterVehicle request) {
-        garageService.vehicleRegistration(request, memberDetails.getId());
+        garageService.garageRegistration(request, memberDetails.getId());
     return ApiResponse.noContent();
     }
+
+    @PutMapping("/info")
+    public ApiResponse<Empty> registerOfInfo (@AuthenticationPrincipal MemberDetails memberDetails,
+                                              @RequestBody RegisterConsumables request) {
+            garageService.registrationOfInfo(request, memberDetails.getId());
+        return ApiResponse.noContent();
+    }
+
 }
