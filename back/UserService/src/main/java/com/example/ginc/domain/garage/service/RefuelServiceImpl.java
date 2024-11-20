@@ -23,6 +23,7 @@ public class RefuelServiceImpl implements RefuelService {
     public void refueling(Refueling refueling, Long user_id) {
         Long car_id = garageService.refueling(refueling, user_id);
         refuelRepository.save(RefuelDomainEntity.refueling(refueling, car_id,clockHolder));
+        // TODO: 유류타입 예외 체크
     }
 
 }

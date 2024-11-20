@@ -1,6 +1,7 @@
 package com.example.ginc.domain.garage.domain;
 
 public record RegisterConsumables(
+        Long totalDrivingDistance,
         Long lastEngineOilChange,
         Long lastTransmissionOilChange,
         Long lastSparkPlugAndCableReplacement,
