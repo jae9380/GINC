@@ -21,10 +21,12 @@ public class GarageJpaEntity {
 	private Long carId;
 	@Column(name = "totalDrivingDistance")
 	private Long totalDrivingDistance;  //  총 주행 거리
-	@Column(name = "totalFuelCost")
-	private Long totalFuelCost;  //  총 주유 금액
-	@Column(name = "totalFuelConsumption")
-	private Long totalFuelConsumption;  //  총 연료 소모량
+	@Column(name = "serviceDrivingDistance")
+	private Long serviceDrivingDistance; // 서비스 이용 시 주행 거리
+	@Column(name = "serviceTtotalFuelCost")
+	private Long serviceTotalFuelCost;  // 서비스 총 주유 금액
+	@Column(name = "serviceTotalFuelConsumption")
+	private Long serviceTotalFuelConsumption;  // 서비스 총 연료 소모량
 	@Column(name = "lastEngineOilChange")
 	private Long lastEngineOilChange;  //  최근 엔진 오일 교체
 	@Column(name = "lastTransmissionOilChange")
@@ -42,8 +44,9 @@ public class GarageJpaEntity {
 		garageJpaEntity.userId =entity.getUser_id();
 		garageJpaEntity.carId = entity.getCar_id();
 		garageJpaEntity.totalDrivingDistance=entity.getTotalDrivingDistance();
-		garageJpaEntity.totalFuelCost=entity.getTotalFuelCost();
-		garageJpaEntity.totalFuelConsumption=entity.getTotalFuelConsumption();
+		garageJpaEntity.serviceDrivingDistance=entity.getServiceDrivingDistance();
+		garageJpaEntity.serviceTotalFuelCost=entity.getServiceTotalFuelCost();
+		garageJpaEntity.serviceTotalFuelConsumption=entity.getServiceTotalFuelConsumption();
 		garageJpaEntity.lastEngineOilChange=entity.getLastEngineOilChange();
 		garageJpaEntity.lastTransmissionOilChange=entity.getLastTransmissionOilChange();
 		garageJpaEntity.lastSparkPlugAndCableReplacement=entity.getLastSparkPlugAndCableReplacement();
@@ -58,8 +61,9 @@ public class GarageJpaEntity {
 				.user_id(userId)
 				.car_id(carId)
 				.totalDrivingDistance(totalDrivingDistance)
-				.totalFuelCost(totalFuelCost)
-				.totalFuelConsumption(totalFuelConsumption)
+				.serviceDrivingDistance(serviceDrivingDistance)
+				.serviceTotalFuelCost(serviceTotalFuelCost)
+				.serviceTotalFuelConsumption(serviceTotalFuelConsumption)
 				.lastEngineOilChange(lastEngineOilChange)
 				.lastTransmissionOilChange(lastTransmissionOilChange)
 				.lastSparkPlugAndCableReplacement(lastSparkPlugAndCableReplacement)

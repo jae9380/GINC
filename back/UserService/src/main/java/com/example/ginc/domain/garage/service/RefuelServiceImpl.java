@@ -22,9 +22,7 @@ public class RefuelServiceImpl implements RefuelService {
     @Transactional
     public void refueling(Refueling refueling, Long user_id) {
         Long car_id = garageService.refueling(refueling, user_id);
-        RefuelDomainEntity entity =
-                refuelRepository.save(RefuelDomainEntity.refueling(refueling, car_id,clockHolder));
-
+        refuelRepository.save(RefuelDomainEntity.refueling(refueling, car_id,clockHolder));
     }
 
 }
