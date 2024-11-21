@@ -20,7 +20,7 @@ import java.util.List;
 public class RefuelController {
     private final RefuelService refuelService;
     @PostMapping
-    public ApiResponse<Empty> refueling (@AuthenticationPrincipal MemberDetails memberDetails,
+    public ApiResponse<Empty> registerRefueling (@AuthenticationPrincipal MemberDetails memberDetails,
                                                @RequestBody Refueling request) {
         refuelService.refueling(request,memberDetails.getId());
         return ApiResponse.noContent();
@@ -33,5 +33,12 @@ public class RefuelController {
                 .map(RefuelResponse::from)
                 .toList());
     }
-//    TODO: 주유기록 갖고오기, 일정 기간이 초과한 정보는 삭제
+
+    @GetMapping("/{refueling_id}")
+    public ApiResponse<RefuelResponse> refueling (@AuthenticationPrincipal MemberDetails memberDetails,
+                                                  @PathVariable(name = "refueling_id") Long refueling_id) {
+        return ApiResponse.ok(RefuelResponse.from(refuelService.getById(refueling_id)));
+    }
+
+//    TODO:  일정 기간이 초과한 정보는 삭제
 }

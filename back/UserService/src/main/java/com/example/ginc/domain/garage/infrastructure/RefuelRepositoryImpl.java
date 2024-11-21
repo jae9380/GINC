@@ -25,6 +25,16 @@ public class RefuelRepositoryImpl implements RefuelRepository {
                 .orElseThrow(GarageException.RefuelingRecordNotFoundException::new);
     }
 
+    @Override
+    public RefuelDomainEntity getById(Long refueling_id) {
+        return findById(refueling_id)
+                .orElseThrow(GarageException.RefuelingRecordNotFoundException::new);
+    }
+
+    private Optional<RefuelDomainEntity> findById(Long refueling_id) {
+        return refuelJpaRepository.findById(refueling_id).map(RefuelJpaEntity::to);
+    }
+
     private Optional<List<RefuelDomainEntity>> findByCarId(Long car_id) {
         return refuelJpaRepository.findByCarId(car_id)
                 .map(list -> list.stream()

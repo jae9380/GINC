@@ -8,4 +8,5 @@ import java.util.List;
 public interface RefuelService {
     void refueling(Refueling refueling, Long user_id);
     List<RefuelDomainEntity> getList(Long user_id);
+    RefuelDomainEntity getById(Long refueling_id);
 }

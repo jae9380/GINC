@@ -6,6 +6,7 @@ import com.example.ginc.domain.garage.domain.GarageDomainEntity;
 import com.example.ginc.domain.garage.domain.RefuelDomainEntity;
 import com.example.ginc.domain.garage.domain.Refueling;
 import com.example.ginc.domain.garage.infrastructure.RefuelRepositoryImpl;
+import com.example.ginc.domain.garage.service.port.RefuelRepository;
 import com.example.ginc.util.commone.service.port.ClockHolder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class RefuelServiceImpl implements RefuelService {
-    private final RefuelRepositoryImpl refuelRepository;
+    private final RefuelRepository refuelRepository;
     private final GarageService garageService;
     private final ClockHolder clockHolder;
     @Override
@@ -32,6 +33,11 @@ public class RefuelServiceImpl implements RefuelService {
     public List<RefuelDomainEntity> getList(Long user_id) {
         Long car_id = garageService.getCar_IdByUser_Id(user_id);
         return refuelRepository.getByCarId(car_id);
+    }
+
+    @Override
+    public RefuelDomainEntity getById(Long refueling_id) {
+        return refuelRepository.getById(refueling_id);
     }
 
 }

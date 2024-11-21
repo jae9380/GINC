@@ -7,4 +7,5 @@ import java.util.List;
 public interface RefuelRepository {
     RefuelDomainEntity save(RefuelDomainEntity entity);
     List<RefuelDomainEntity> getByCarId(Long user_id);
+    RefuelDomainEntity getById(Long refueling_id);
 }
