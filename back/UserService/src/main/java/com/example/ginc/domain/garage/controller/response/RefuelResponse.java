@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 public record RefuelResponse(
+        Long id,
         int segmentTotalDistance, // 특정 구간의 총 주행 거리
         int totalRefuelingCost,   // 총 주유 비용
         FuelType fuelType,        // 연료 종류
@@ -15,6 +16,7 @@ public record RefuelResponse(
 ) {
     public static RefuelResponse from(RefuelDomainEntity entity) {
         return new RefuelResponse(
+                entity.getId(),
                 entity.getSegmentTotalDistance(),
                 entity.getTotalRefuelingCost(),
                 entity.getFuelType(),
