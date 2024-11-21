@@ -40,5 +40,13 @@ public class RefuelController {
         return ApiResponse.ok(RefuelResponse.from(refuelService.getById(refueling_id)));
     }
 
+    @PutMapping("/{refueling_id}")
+    public ApiResponse<Empty> modifyRefueling (@AuthenticationPrincipal MemberDetails memberDetails,
+                                               @PathVariable(name = "refueling_id") Long refueling_id,
+                                               @RequestBody Refueling request) {
+        refuelService.modifyRefueling(refueling_id, request);
+        return ApiResponse.noContent();
+    }
+
 //    TODO:  일정 기간이 초과한 정보는 삭제
 }

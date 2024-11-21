@@ -40,4 +40,11 @@ public class RefuelServiceImpl implements RefuelService {
         return refuelRepository.getById(refueling_id);
     }
 
+    @Override
+    @Transactional
+    public void modifyRefueling(Long refueling_id, Refueling request) {
+        RefuelDomainEntity entity = refuelRepository.getById(refueling_id);
+        refuelRepository.save(entity.update(request,clockHolder));
+    }
+
 }

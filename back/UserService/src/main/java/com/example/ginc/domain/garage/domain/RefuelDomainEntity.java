@@ -39,7 +39,21 @@ public class RefuelDomainEntity {
                 .fuelType(request.fuelType())
                 .costPerLiter(request.costPerLiter())
                 .refuelingVolume(request.refuelingVolume())
-                .refuelingAt(clockHolder.millis())
+                .refuelingAt(clockHolder.parseDateToMillis(request.refuelingAt()))
                 .build();
     }
+
+    public RefuelDomainEntity update(Refueling request, ClockHolder clockHolder) {
+        return RefuelDomainEntity.builder()
+                .id(id)
+                .car_id(car_id)
+                .segmentTotalDistance(request.segmentTotalDistance())
+                .totalRefuelingCost(request.totalRefuelingCost())
+                .fuelType(request.fuelType())
+                .costPerLiter(request.costPerLiter())
+                .refuelingVolume(request.refuelingVolume())
+                .refuelingAt(clockHolder.parseDateToMillis(request.refuelingAt()))
+                .build();
+    }
+
 }

@@ -18,6 +18,7 @@ public class SystemClockHolder implements ClockHolder {
     public long millis() {
         return Clock.systemUTC().millis();
     }
+    @Override
     public Long parseDateToMillis(String dateStr) {
         try {
             if (dateStr.matches("\\d{4}-\\d{2}-\\d{2}")) { // 형식: yyyy-MM-dd
