@@ -47,4 +47,11 @@ public class RefuelServiceImpl implements RefuelService {
         refuelRepository.save(entity.update(request,clockHolder));
     }
 
+    @Override
+    @Transactional
+    public void deleteRefueling(Long refueling_id) {
+        refuelRepository.deleteById(refueling_id);
+    }
+    // TODO: user_id를 이용하여 데이터 조작 가능 여부 검증
+
 }

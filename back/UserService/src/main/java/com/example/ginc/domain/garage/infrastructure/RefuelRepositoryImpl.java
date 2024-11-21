@@ -31,6 +31,11 @@ public class RefuelRepositoryImpl implements RefuelRepository {
                 .orElseThrow(GarageException.RefuelingRecordNotFoundException::new);
     }
 
+    @Override
+    public void deleteById(Long refueling_id) {
+        refuelJpaRepository.deleteById(refueling_id);
+    }
+
     private Optional<RefuelDomainEntity> findById(Long refueling_id) {
         return refuelJpaRepository.findById(refueling_id).map(RefuelJpaEntity::to);
     }

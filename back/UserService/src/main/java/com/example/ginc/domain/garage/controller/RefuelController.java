@@ -48,5 +48,12 @@ public class RefuelController {
         return ApiResponse.noContent();
     }
 
+    @DeleteMapping("/{refueling_id}")
+    public ApiResponse<Empty> deleteRefueling (@AuthenticationPrincipal MemberDetails memberDetails,
+                                               @PathVariable(name = "refueling_id") Long refueling_id) {
+        refuelService.deleteRefueling(refueling_id);
+        return ApiResponse.noContent();
+    }
+
 //    TODO:  일정 기간이 초과한 정보는 삭제
 }
