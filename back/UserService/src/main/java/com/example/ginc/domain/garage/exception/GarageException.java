@@ -15,5 +15,16 @@ public class GarageException extends GincException {
             super(GARAGE_NOT_FOUND);
         }
     }
+    public static class CarNotFoundException extends GarageException {
+        public CarNotFoundException() {
+            super(CAR_NOT_FOUND);
+        }
+    }
+
+    public static class RefuelingRecordNotFoundException extends GarageException {
+        public RefuelingRecordNotFoundException() {
+            super(REFUELING_RECORD_NOT_FOUND);
+        }
+    }
 }
 

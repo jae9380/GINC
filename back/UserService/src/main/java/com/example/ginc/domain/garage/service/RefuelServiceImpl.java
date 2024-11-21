@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -24,6 +26,12 @@ public class RefuelServiceImpl implements RefuelService {
         Long car_id = garageService.refueling(refueling, user_id);
         refuelRepository.save(RefuelDomainEntity.refueling(refueling, car_id,clockHolder));
         // TODO: 유류타입 예외 체크
+    }
+
+    @Override
+    public List<RefuelDomainEntity> getList(Long user_id) {
+        Long car_id = garageService.getCar_IdByUser_Id(user_id);
+        return refuelRepository.getByCarId(car_id);
     }
 
 }

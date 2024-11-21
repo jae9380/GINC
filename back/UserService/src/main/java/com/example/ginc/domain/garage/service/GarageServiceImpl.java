@@ -50,6 +50,17 @@ public class GarageServiceImpl implements GarageService {
         garageRepository.save(entity);
     }
 
+    @Override
+    public Long getCar_IdByUser_Id(Long user_id) {
+        GarageDomainEntity entity = getByUser_Id(user_id);
+
+        if (entity.getCar_id() == null) {
+            throw new  GarageException.CarNotFoundException();
+        }
+
+        return entity.getCar_id();
+    }
+
 
     private GarageDomainEntity getByUser_Id(Long user_id) {
         return findByUser_Id(user_id)
