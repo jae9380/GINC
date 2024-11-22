@@ -71,7 +71,8 @@ public class GarageServiceImpl implements GarageService {
     }
 
 
-    private GarageDomainEntity getByUser_Id(Long user_id) {
+    @Override
+    public GarageDomainEntity getByUser_Id(Long user_id) {
         return findByUser_Id(user_id)
                 .orElseThrow(GarageException.GarageNotFoundException::new);
     }
