@@ -52,6 +52,12 @@ public class RefuelServiceImpl implements RefuelService {
     public void deleteRefueling(Long refueling_id) {
         refuelRepository.deleteById(refueling_id);
     }
+
+    @Override
+    @Transactional
+    public void deleteByCar_Id(Long car_id) {
+        refuelRepository.deleteByCarId(car_id);
+    }
     // TODO: user_id를 이용하여 데이터 조작 가능 여부 검증
 
 }

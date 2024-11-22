@@ -22,4 +22,14 @@ public class GarageRepositoryImpl implements GarageRepository {
     public Optional<GarageDomainEntity> findByUserId(Long user_id) {
         return garageJpaRepository.findByUserId(user_id).map(GarageJpaEntity::to);
     }
+
+    @Override
+    public void deleteByUserId(Long user_id) {
+        garageJpaRepository.deleteByUserId(user_id);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        garageJpaRepository.deleteById(id);
+    }
 }

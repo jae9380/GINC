@@ -9,4 +9,5 @@ public interface RefuelRepository {
     List<RefuelDomainEntity> getByCarId(Long user_id);
     RefuelDomainEntity getById(Long refueling_id);
     void deleteById(Long refueling_id);
+    void deleteByCarId(Long car_id);
 }

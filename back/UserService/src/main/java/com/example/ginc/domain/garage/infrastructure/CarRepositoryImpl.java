@@ -18,4 +18,9 @@ public class CarRepositoryImpl implements CarRepository {
     public CarDomainEntity save(CarDomainEntity entity) {
         return carJpaRepository.save(CarJpaEntity.from(entity)).to();
     }
+
+    @Override
+    public void deleteById(Long car_id) {
+        carJpaRepository.deleteById(car_id);
+    }
 }

@@ -33,9 +33,16 @@ public class GarageController {
     }
 
     @PutMapping
-    public ApiResponse<Empty> updateOfInfo (@AuthenticationPrincipal MemberDetails memberDetails,
+    public ApiResponse<Empty> updateGarageProfile (@AuthenticationPrincipal MemberDetails memberDetails,
                                               @RequestBody RegisterConsumables request) {
         garageService.registrationOfInfo(request, memberDetails.getId());
+        return ApiResponse.noContent();
+    }
+
+//    TODO: 아래의 삭제 관련 API, Garage, Car 삭제 관련 보완 예정
+    @DeleteMapping
+    public ApiResponse<Empty> deleteGarageProfile (@AuthenticationPrincipal MemberDetails memberDetails) {
+        garageService.deleteByUser_Id(memberDetails.getId());
         return ApiResponse.noContent();
     }
 

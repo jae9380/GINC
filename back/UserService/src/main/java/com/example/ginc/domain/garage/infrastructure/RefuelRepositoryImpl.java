@@ -36,6 +36,11 @@ public class RefuelRepositoryImpl implements RefuelRepository {
         refuelJpaRepository.deleteById(refueling_id);
     }
 
+    @Override
+    public void deleteByCarId(Long car_id) {
+        refuelJpaRepository.deleteByCarId(car_id);
+    }
+
     private Optional<RefuelDomainEntity> findById(Long refueling_id) {
         return refuelJpaRepository.findById(refueling_id).map(RefuelJpaEntity::to);
     }

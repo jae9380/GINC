@@ -11,4 +11,5 @@ public interface RefuelService {
     RefuelDomainEntity getById(Long refueling_id);
     void modifyRefueling(Long refueling_id, Refueling refueling);
     void deleteRefueling(Long refueling_id);
+    void deleteByCar_Id(Long car_id);
 }

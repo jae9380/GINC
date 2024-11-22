@@ -7,4 +7,7 @@ import java.util.Optional;
 public interface GarageRepository {
     GarageDomainEntity save(GarageDomainEntity entity);
     Optional<GarageDomainEntity> findByUserId(Long user_id);
+    void deleteByUserId(Long id);
+
+    void deleteById(Long id);
 }

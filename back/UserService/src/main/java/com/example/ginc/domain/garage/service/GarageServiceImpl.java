@@ -1,6 +1,7 @@
 package com.example.ginc.domain.garage.service;
 
 import com.example.ginc.domain.garage.controller.port.GarageService;
+import com.example.ginc.domain.garage.controller.port.RefuelService;
 import com.example.ginc.domain.garage.domain.*;
 import com.example.ginc.domain.garage.exception.GarageException;
 import com.example.ginc.domain.garage.policy.GaragePolicy;
@@ -75,6 +76,15 @@ public class GarageServiceImpl implements GarageService {
     public GarageDomainEntity getByUser_Id(Long user_id) {
         return findByUser_Id(user_id)
                 .orElseThrow(GarageException.GarageNotFoundException::new);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByUser_Id(Long user_id) {
+        GarageDomainEntity entity = getByUser_Id(user_id);
+
+        garageRepository.deleteById(entity.getId());
+        carService.deleteById(entity.getCar_id());
     }
 
     private Optional<GarageDomainEntity> findByUser_Id(Long user_id) {

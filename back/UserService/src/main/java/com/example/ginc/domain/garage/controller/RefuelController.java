@@ -55,5 +55,13 @@ public class RefuelController {
         return ApiResponse.noContent();
     }
 
+//    TODO: 아래의 삭제 관련 API, Refueling 삭제 관련 보완 예정
+    @DeleteMapping("/car_id/{car_id}")
+    public ApiResponse<Empty> deleteByCar_Id (@AuthenticationPrincipal MemberDetails memberDetails,
+                                              @PathVariable(name = "car_id") Long car_id) {
+        refuelService.deleteByCar_Id(car_id);
+        return ApiResponse.noContent();
+    }
+
 //    TODO:  일정 기간이 초과한 정보는 삭제
 }

@@ -8,4 +8,5 @@ public interface GarageService {
     void registrationOfInfo(RegisterConsumables request, Long user_id);
     Long getCar_IdByUser_Id(Long user_id);
     GarageDomainEntity getByUser_Id(Long id);
+    void deleteByUser_Id(Long user_id);
 }

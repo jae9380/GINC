@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface RefuelJpaRepository extends JpaRepository<RefuelJpaEntity, Long> {
     Optional<List<RefuelJpaEntity>> findByCarId(Long car_id);
+    void deleteByCarId(Long car_id);
 }
