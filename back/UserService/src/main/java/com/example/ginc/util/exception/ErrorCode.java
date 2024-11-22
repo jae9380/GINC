@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
     // Global
     BAD_INPUT_FORMAT(HttpStatus.BAD_REQUEST, "입력 형식이 틀렸습니다."),
+    NOT_AUTHORIZED(HttpStatus.FORBIDDEN,"권한이 없습니다."),
 
     // Account
     DUPLICATE_USERNAME(HttpStatus.BAD_REQUEST, "이미 존재하는 아이디 입니다."),
@@ -19,6 +20,7 @@ public enum ErrorCode {
     GARAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "일치하는 차고 정보가 없습니다."),
     CAR_NOT_FOUND(HttpStatus.NOT_FOUND, "등록된 차량 정보가 없습니다."),
     REFUELING_RECORD_NOT_FOUND(HttpStatus.NOT_FOUND, "등록된 주유 기록이 없습니다.");
+
 
     private final HttpStatus status;
     private final String message;
