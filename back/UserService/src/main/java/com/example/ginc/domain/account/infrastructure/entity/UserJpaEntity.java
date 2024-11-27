@@ -46,6 +46,7 @@ public class UserJpaEntity {
     @Column(name = "birth")
     private LocalDate birth;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
 

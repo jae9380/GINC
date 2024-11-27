@@ -12,4 +12,14 @@ public class TestClockHolder implements ClockHolder {
     public LocalDate now() {
         return LocalDate.parse(date);
     }
+
+    @Override
+    public long millis() {
+        return 0;
+    }
+
+    @Override
+    public Long parseDateToMillis(String dateStr) {
+        return null;
+    }
 }
