@@ -32,6 +32,10 @@ dependencies {
 //  Web Development
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
+//  Batch
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    testImplementation 'org.springframework.batch:spring-batch-test'
+
 //  Developer Tools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     compileOnly 'org.projectlombok:lombok'
