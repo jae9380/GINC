@@ -38,15 +38,15 @@ public class GarageDomainEntity {
         this.lastChangeBatteryDate = lastChangeBatteryDate;
     }
 
-	public GarageDomainEntity refueling(Refueling refueling) {
+	public GarageDomainEntity refueling(RefuelDomainEntity entity) {
 		return GarageDomainEntity.builder()
 				.id(id)
 				.user_id(user_id)
 				.car_id(car_id)
-				.totalDrivingDistance(totalDrivingDistance==null?refueling.segmentTotalDistance():totalDrivingDistance+refueling.segmentTotalDistance())
-				.serviceDrivingDistance(serviceDrivingDistance==null?refueling.segmentTotalDistance():serviceDrivingDistance+refueling.segmentTotalDistance())
-				.serviceTotalFuelCost(serviceTotalFuelCost==null?refueling.totalRefuelingCost():serviceTotalFuelCost+refueling.totalRefuelingCost())
-				.serviceTotalFuelConsumption(serviceTotalFuelConsumption ==null?refueling.refuelingVolume(): serviceTotalFuelConsumption +refueling.refuelingVolume())
+				.totalDrivingDistance(totalDrivingDistance==null?entity.getSegmentTotalDistance():totalDrivingDistance+entity.getSegmentTotalDistance())
+				.serviceDrivingDistance(serviceDrivingDistance==null?entity.getSegmentTotalDistance():serviceDrivingDistance+entity.getSegmentTotalDistance())
+				.serviceTotalFuelCost(serviceTotalFuelCost==null?entity.getTotalRefuelingCost():serviceTotalFuelCost+entity.getTotalRefuelingCost())
+				.serviceTotalFuelConsumption(serviceTotalFuelConsumption ==null?entity.getRefuelingVolume(): serviceTotalFuelConsumption +entity.getRefuelingVolume())
 				.lastEngineOilChange(lastEngineOilChange)
 				.lastTransmissionOilChange(lastTransmissionOilChange)
 				.lastSparkPlugAndCableReplacement(lastSparkPlugAndCableReplacement)
