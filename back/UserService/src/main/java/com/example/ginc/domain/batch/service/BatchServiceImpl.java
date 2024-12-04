@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class BatchServiceImpl implements BatchService {
     private final JobLauncher jobLauncher;
     private final Job refuelingJob;
-
     @Override
     public void refueling(RefuelDomainEntity entity) {
         try {

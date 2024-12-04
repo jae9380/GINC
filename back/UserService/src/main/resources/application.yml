@@ -25,5 +25,9 @@ spring:
       ddl-auto: create
     database-platform: org.hibernate.dialect.H2Dialect
 
+  batch:
+    job:
+      enabled: false
+
 jwt:
   secret-key: ${jwt.secret-key}

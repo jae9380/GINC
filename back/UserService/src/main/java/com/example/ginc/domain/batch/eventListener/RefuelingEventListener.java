@@ -18,6 +18,11 @@ public class RefuelingEventListener {
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void refuelingEventListener(RefuelingEvent event) {
         log.info("Operation : Refueling Event");
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         batchService.refueling(event.getEntity());
     }
 }
