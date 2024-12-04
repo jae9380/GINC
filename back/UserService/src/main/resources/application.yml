@@ -25,5 +25,10 @@ spring:
       ddl-auto: create
     database-platform: org.hibernate.dialect.H2Dialect
 
+# 배치코드 변경으로 사용 x
+#  batch:
+#    job:
+#      enabled: false
+
 jwt:
   secret-key: ${jwt.secret-key}
