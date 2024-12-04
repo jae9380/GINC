@@ -32,9 +32,9 @@ dependencies {
 //  Web Development
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-//  Batch
-    implementation 'org.springframework.boot:spring-boot-starter-batch'
-    testImplementation 'org.springframework.batch:spring-batch-test'
+////  Batch  배치코드 변경으로 사용 x
+//    implementation 'org.springframework.boot:spring-boot-starter-batch'
+//    testImplementation 'org.springframework.batch:spring-batch-test'
 
 //  Developer Tools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

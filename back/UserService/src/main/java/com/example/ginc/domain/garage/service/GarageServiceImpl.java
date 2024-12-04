@@ -3,6 +3,7 @@ package com.example.ginc.domain.garage.service;
 import com.example.ginc.domain.garage.controller.port.GarageService;
 import com.example.ginc.domain.garage.controller.port.RefuelService;
 import com.example.ginc.domain.garage.domain.*;
+import com.example.ginc.domain.garage.event.RefuelingEvent;
 import com.example.ginc.domain.garage.exception.GarageException;
 import com.example.ginc.domain.garage.policy.GaragePolicy;
 import com.example.ginc.domain.garage.service.port.CarRepository;
@@ -10,14 +11,18 @@ import com.example.ginc.domain.garage.service.port.CarService;
 import com.example.ginc.domain.garage.service.port.GarageRepository;
 import com.example.ginc.util.commone.service.port.ClockHolder;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class GarageServiceImpl implements GarageService {
     private final GarageRepository garageRepository;
     private final CarService carService;
@@ -33,18 +38,6 @@ public class GarageServiceImpl implements GarageService {
                 .user_id(user_id)
                 .car_id(car_id)
                 .build());
-    }
-
-    @Override
-    public Long refueling(Refueling refueling, Long user_id) {
-        GarageDomainEntity entity = getByUser_Id(user_id);
-
-        garagePolicy.verifyRecordCreationPermissions(entity, user_id);
-
-        entity = entity.refueling(refueling);
-
-        garageRepository.save(entity);
-        return entity.getCar_id();
     }
 
     @Override
@@ -87,6 +80,17 @@ public class GarageServiceImpl implements GarageService {
         carService.deleteById(entity.getCar_id());
     }
 
+    @Override
+    public void refueling(RefuelDomainEntity refueling, Long user_id) {
+        GarageDomainEntity entity = getByUser_Id(user_id);
+
+        // TODO: user_id을 기준으로 Garage 불러오고, Garage의 user_id를 비교?
+        garagePolicy.verifyRecordCreationPermissions(entity, user_id);
+
+        entity = entity.refueling(refueling);
+
+        garageRepository.save(entity);
+    }
     private Optional<GarageDomainEntity> findByUser_Id(Long user_id) {
         return garageRepository.findByUserId(user_id);
     }
