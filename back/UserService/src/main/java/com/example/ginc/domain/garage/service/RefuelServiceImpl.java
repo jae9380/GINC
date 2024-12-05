@@ -1,5 +1,6 @@
 package com.example.ginc.domain.garage.service;
 
+import com.example.ginc.domain.garage.event.ModifyRefuelingRecordEvent;
 import com.example.ginc.domain.garage.event.RefuelingEvent;
 import com.example.ginc.domain.garage.controller.port.GarageService;
 import com.example.ginc.domain.garage.controller.port.RefuelService;
@@ -48,9 +49,21 @@ public class RefuelServiceImpl implements RefuelService {
 
     @Override
     @Transactional
-    public void modifyRefueling(Long refueling_id, Refueling request) {
+    public void modifyRefueling(Long user_id, Long refueling_id, Refueling request) {
         RefuelDomainEntity entity = refuelRepository.getById(refueling_id);
-        refuelRepository.save(entity.update(request,clockHolder));
+        int modifiedDistance = (request.segmentTotalDistance() - entity.getSegmentTotalDistance()),
+                modifiedCost = request.totalRefuelingCost() - entity.getTotalRefuelingCost(),
+                modifiedVolume = (request.refuelingVolume() - entity.getRefuelingVolume());
+        entity = entity.update(request,clockHolder);
+        refuelRepository.save(entity);
+
+        publisher.publishEvent(new ModifyRefuelingRecordEvent(
+                this, user_id,
+                RefuelDomainEntity.builder()
+                                .segmentTotalDistance(modifiedDistance)
+                                .totalRefuelingCost(modifiedCost)
+                                .refuelingVolume(modifiedVolume)
+                                .build()));
     }
 
     @Override

@@ -91,6 +91,16 @@ public class GarageServiceImpl implements GarageService {
 
         garageRepository.save(entity);
     }
+
+    @Override
+    public void modifiedRefuelingRecord(RefuelDomainEntity refueling, Long user_id) {
+        GarageDomainEntity entity = getByUser_Id(user_id);
+
+        entity = entity.refueling(refueling);
+
+        garageRepository.save(entity);
+    }
+
     private Optional<GarageDomainEntity> findByUser_Id(Long user_id) {
         return garageRepository.findByUserId(user_id);
     }

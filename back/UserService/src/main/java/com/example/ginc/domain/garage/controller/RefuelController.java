@@ -44,7 +44,7 @@ public class RefuelController {
     public ApiResponse<Empty> modifyRefueling (@AuthenticationPrincipal MemberDetails memberDetails,
                                                @PathVariable(name = "refueling_id") Long refueling_id,
                                                @RequestBody Refueling request) {
-        refuelService.modifyRefueling(refueling_id, request);
+        refuelService.modifyRefueling(memberDetails.getId(), refueling_id, request);
         return ApiResponse.noContent();
     }
 

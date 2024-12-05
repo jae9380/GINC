@@ -9,4 +9,5 @@ public interface GarageService {
     GarageDomainEntity getByUser_Id(Long id);
     void deleteByUser_Id(Long user_id);
     void refueling(RefuelDomainEntity refueling, Long user_id);
+    void modifiedRefuelingRecord(RefuelDomainEntity refueling, Long user_id);
 }

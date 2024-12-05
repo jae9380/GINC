@@ -46,7 +46,7 @@ public class GarageDomainEntity {
 				.totalDrivingDistance(totalDrivingDistance==null?entity.getSegmentTotalDistance():totalDrivingDistance+entity.getSegmentTotalDistance())
 				.serviceDrivingDistance(serviceDrivingDistance==null?entity.getSegmentTotalDistance():serviceDrivingDistance+entity.getSegmentTotalDistance())
 				.serviceTotalFuelCost(serviceTotalFuelCost==null?entity.getTotalRefuelingCost():serviceTotalFuelCost+entity.getTotalRefuelingCost())
-				.serviceTotalFuelConsumption(serviceTotalFuelConsumption ==null?entity.getRefuelingVolume(): serviceTotalFuelConsumption +entity.getRefuelingVolume())
+				.serviceTotalFuelConsumption(serviceTotalFuelConsumption ==null?entity.getRefuelingVolume(): serviceTotalFuelConsumption+entity.getRefuelingVolume())
 				.lastEngineOilChange(lastEngineOilChange)
 				.lastTransmissionOilChange(lastTransmissionOilChange)
 				.lastSparkPlugAndCableReplacement(lastSparkPlugAndCableReplacement)
