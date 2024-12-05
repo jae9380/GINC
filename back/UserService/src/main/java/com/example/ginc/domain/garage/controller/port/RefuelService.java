@@ -10,6 +10,6 @@ public interface RefuelService {
     List<RefuelDomainEntity> getList(Long user_id);
     RefuelDomainEntity getById(Long refueling_id);
     void modifyRefueling(Long user_id, Long refueling_id, Refueling refueling);
-    void deleteRefueling(Long refueling_id);
+    void deleteRefueling(Long user_id, Long refueling_id);
     void deleteByCar_Id(Long car_id);
 }

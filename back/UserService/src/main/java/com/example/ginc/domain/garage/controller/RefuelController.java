@@ -51,7 +51,7 @@ public class RefuelController {
     @DeleteMapping("/{refueling_id}")
     public ApiResponse<Empty> deleteRefueling (@AuthenticationPrincipal MemberDetails memberDetails,
                                                @PathVariable(name = "refueling_id") Long refueling_id) {
-        refuelService.deleteRefueling(refueling_id);
+        refuelService.deleteRefueling(memberDetails.getId(), refueling_id);
         return ApiResponse.noContent();
     }
 

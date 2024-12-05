@@ -1,6 +1,7 @@
 package com.example.ginc.domain.garage.eventListener;
 
 import com.example.ginc.domain.garage.controller.port.GarageService;
+import com.example.ginc.domain.garage.event.DeleteRefuelingRecordEvent;
 import com.example.ginc.domain.garage.event.ModifyRefuelingRecordEvent;
 import com.example.ginc.domain.garage.event.RefuelingEvent;
 import lombok.RequiredArgsConstructor;
@@ -16,15 +17,22 @@ public class RefuelingEventListener {
 
     @EventListener
     public void refuelingEventListener(RefuelingEvent event) {
-        log.info("Refueling Event Operation : Update Garage information based on refueling records");
+        log.info("UPDATE - Refueling Event Operation : Update Garage information based on refueling records");
 
         garageService.refueling(event.getEntity(), event.getUser_id());
     }
 
     @EventListener
-    public void modifiedRefuelingRecordEvent(ModifyRefuelingRecordEvent event) {
-        log.info("Modified Refueling Record Event Operation : Update Garage information based on modified refueling records");
+    public void modifyRefuelingRecordEvent(ModifyRefuelingRecordEvent event) {
+        log.info("MODIFY - Modified Refueling Record Event Operation : Update Garage information based on modified refueling records");
 
-        garageService.modifiedRefuelingRecord(event.getEntity(), event.getUser_id());
+        garageService.modifyRefuelingRecord(event.getEntity(), event.getUser_id());
+    }
+
+    @EventListener
+    public void deleteRefuelingRecordEvent(DeleteRefuelingRecordEvent event) {
+        log.info("DELETE - Deleted Refueling Record Event Operation : Update Garage information based on deleted refueling records");
+
+        garageService.deleteRefuelingRecord(event.getEntity(), event.getUser_id());
     }
 }
