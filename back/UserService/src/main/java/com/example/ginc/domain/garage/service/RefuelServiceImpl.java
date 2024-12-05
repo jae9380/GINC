@@ -1,7 +1,5 @@
 package com.example.ginc.domain.garage.service;
 
-import com.example.ginc.domain.garage.event.DeleteRefuelingRecordEvent;
-import com.example.ginc.domain.garage.event.ModifyRefuelingRecordEvent;
 import com.example.ginc.domain.garage.event.RefuelingEvent;
 import com.example.ginc.domain.garage.controller.port.GarageService;
 import com.example.ginc.domain.garage.controller.port.RefuelService;
@@ -33,7 +31,7 @@ public class RefuelServiceImpl implements RefuelService {
                         garageService.getCar_IdByUser_Id(user_id),
                         clockHolder));
 
-        publisher.publishEvent(new RefuelingEvent(this, user_id, entity));
+        publisher.publishEvent(new RefuelingEvent(this,"UPDATE", user_id, entity));
         // TODO: 유류타입 예외 체크
     }
 
@@ -58,8 +56,8 @@ public class RefuelServiceImpl implements RefuelService {
         entity = entity.update(request,clockHolder);
         refuelRepository.save(entity);
 
-        publisher.publishEvent(new ModifyRefuelingRecordEvent(
-                this, user_id,
+        publisher.publishEvent(new RefuelingEvent(
+                this,"MODIFY", user_id,
                 RefuelDomainEntity.builder()
                                 .segmentTotalDistance(modifiedDistance)
                                 .totalRefuelingCost(modifiedCost)
@@ -72,7 +70,7 @@ public class RefuelServiceImpl implements RefuelService {
     public void deleteRefueling(Long user_id, Long refueling_id) {
         RefuelDomainEntity entity = getById(refueling_id);
 
-        publisher.publishEvent(new DeleteRefuelingRecordEvent(this, user_id,
+        publisher.publishEvent(new RefuelingEvent(this, "DELETE", user_id,
                 RefuelDomainEntity.builder()
                         .segmentTotalDistance(-entity.getSegmentTotalDistance())
                         .totalRefuelingCost(-entity.getTotalRefuelingCost())

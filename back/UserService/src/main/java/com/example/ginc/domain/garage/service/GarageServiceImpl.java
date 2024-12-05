@@ -81,29 +81,11 @@ public class GarageServiceImpl implements GarageService {
     }
 
     @Override
-    public void refueling(RefuelDomainEntity refueling, Long user_id) {
+    public void refuelingEvent(RefuelDomainEntity refueling, Long user_id) {
         GarageDomainEntity entity = getByUser_Id(user_id);
 
         // TODO: user_id을 기준으로 Garage 불러오고, Garage의 user_id를 비교?
         garagePolicy.verifyRecordCreationPermissions(entity, user_id);
-
-        entity = entity.refueling(refueling);
-
-        garageRepository.save(entity);
-    }
-
-    @Override
-    public void modifyRefuelingRecord(RefuelDomainEntity refueling, Long user_id) {
-        GarageDomainEntity entity = getByUser_Id(user_id);
-
-        entity = entity.refueling(refueling);
-
-        garageRepository.save(entity);
-    }
-
-    @Override
-    public void deleteRefuelingRecord(RefuelDomainEntity refueling, Long userId) {
-        GarageDomainEntity entity = getByUser_Id(userId);
 
         entity = entity.refueling(refueling);
 
