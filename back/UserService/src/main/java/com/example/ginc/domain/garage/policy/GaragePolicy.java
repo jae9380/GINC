@@ -5,6 +5,7 @@ import com.example.ginc.domain.garage.domain.ReplacementPartType;
 import com.example.ginc.util.commone.service.port.ClockHolder;
 import com.example.ginc.util.exception.GlobalException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -13,6 +14,7 @@ import static com.example.ginc.domain.garage.domain.ReplacementPartType.*;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class GaragePolicy {
     private final ClockHolder clockHolder;
 
@@ -90,6 +92,8 @@ public class GaragePolicy {
             default -> throw new IllegalArgumentException("Invalid Replacement Part Type");
         }
 
+        log.info("RESULT / Check_replacementCycleByKm Method");
+        log.info("---"+type+" - "+(period>=cycle)+"---");
         return period >= cycle;
     }
 
@@ -106,7 +110,8 @@ public class GaragePolicy {
             case BATTERY -> millis = BATTERY_MILLIS_CYCLE;
             default -> throw new IllegalArgumentException("Invalid Replacement Part Type");
         }
-
+        log.info("RESULT / Check_replacementCycleByDate Method");
+        log.info("---"+type+" - "+(lapsedDate>=millis)+"---");
         return lapsedDate >= millis;
     }
 }
