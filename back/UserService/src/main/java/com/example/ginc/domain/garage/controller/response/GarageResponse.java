@@ -28,7 +28,7 @@ public record GarageResponse (
                 entity.getLastEngineOilChange(),
                 entity.getLastTransmissionOilChange(),
                 entity.getLastSparkPlugAndCableReplacement(),
-                entity.getLastBrakeFluidChange(),
+                entity.getLastBrakeOilChange(),
                 entity.getLastChangeBatteryDate()
         );
     }

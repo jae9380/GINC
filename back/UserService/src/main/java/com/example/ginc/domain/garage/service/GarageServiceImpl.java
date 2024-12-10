@@ -17,7 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import java.util.Map;
 import java.util.Optional;
+
+import static com.example.ginc.domain.garage.domain.ReplacementPartType.ENGINE_OIL;
 
 @Service
 @RequiredArgsConstructor
@@ -90,8 +93,19 @@ public class GarageServiceImpl implements GarageService {
         entity = entity.refueling(refueling);
 
         garageRepository.save(entity);
+        checkReplacementCycle(entity);
     }
 
+    private void checkReplacementCycle(GarageDomainEntity entity) {
+        Map<ReplacementPartType, Boolean> replacementResults = garagePolicy.checkAllReplacementCycles(entity);
+
+        replacementResults.forEach((partType, needsReplacement) -> {
+            if (needsReplacement) {
+                log.info(partType + " needs replacement.");
+                // TODO: 알림기능 구현 시, 부품교체 알림 발생 이벤트 처리
+            }
+        });
+    }
     private Optional<GarageDomainEntity> findByUser_Id(Long user_id) {
         return garageRepository.findByUserId(user_id);
     }

@@ -27,30 +27,54 @@ public class GarageJpaEntity {
 	private Long serviceTotalFuelCost;  // 서비스 총 주유 금액
 	@Column(name = "serviceTotalFuelConsumption")
 	private Long serviceTotalFuelConsumption;  // 서비스 총 연료 소모량
+	@Column(name = "lastEngineOilChangeDate")
+	private Long lastEngineOilChangeDate;  // 최근 엔진 오일 교체 날짜
 	@Column(name = "lastEngineOilChange")
 	private Long lastEngineOilChange;  //  최근 엔진 오일 교체
+	@Column(name = "lastTransmissionOilChangeDate")
+	private Long lastTransmissionOilChangeDate;  // 최근 미션 오일 교체 날짜
 	@Column(name = "lastTransmissionOilChange")
 	private Long lastTransmissionOilChange;  //  최근 미션 오일
+	@Column(name = "lastBrakeOilChangeDate")
+	private Long lastBrakeFluidChangeDate;  //  최근 브레이크 액 교체 날짜
+	@Column(name = "lastBrakeOilChange")
+	private Long lastBrakeFluidChange;  //  최근 브레이크 액
+	@Column(name = "lastBrakePadChangeDate")
+	private Long lastBrakePadChangeDate;  // 최근 브레이크 패드 교체 날짜
+	@Column(name = "lastBrakePadChange")
+	private Long lastBrakePadChange;  // 최근 브레이크 패드
+	@Column(name = "lastSparkPlugAndCableReplacementDate")
+	private Long lastSparkPlugAndCableReplacementDate;  // 최근 점화 플러그 및 케이블 교체 날짜
 	@Column(name = "lastSparkPlugAndCableReplacement")
 	private Long lastSparkPlugAndCableReplacement;  //  최근 점화 플러그 및 케이블
-	@Column(name = "lastBrakeFluidChange")
-	private Long lastBrakeFluidChange;  //  최근 브레이크 액
+	@Column(name = "fuelFilterChangeDate")
+	private Long fuelFilterChangeDate;  // 최근 연료 필터 교체 날짜
+	@Column(name = "fuelFilterChange")
+	private Long fuelFilterChange;  // 최근 연료 필터
 	@Column(name = "lastChangeBatteryDate")
 	private Long lastChangeBatteryDate;  //  배터리 교체 날짜
 
 	public static GarageJpaEntity from(GarageDomainEntity entity) {
 		GarageJpaEntity garageJpaEntity = new GarageJpaEntity();
 		garageJpaEntity.id=entity.getId();
-		garageJpaEntity.userId =entity.getUser_id();
-		garageJpaEntity.carId = entity.getCar_id();
+		garageJpaEntity.userId=entity.getUser_id();
+		garageJpaEntity.carId=entity.getCar_id();
 		garageJpaEntity.totalDrivingDistance=entity.getTotalDrivingDistance();
 		garageJpaEntity.serviceDrivingDistance=entity.getServiceDrivingDistance();
 		garageJpaEntity.serviceTotalFuelCost=entity.getServiceTotalFuelCost();
 		garageJpaEntity.serviceTotalFuelConsumption=entity.getServiceTotalFuelConsumption();
+		garageJpaEntity.lastEngineOilChangeDate=entity.getLastEngineOilChangeDate();
 		garageJpaEntity.lastEngineOilChange=entity.getLastEngineOilChange();
+		garageJpaEntity.lastTransmissionOilChangeDate=entity.getLastTransmissionOilChangeDate();
 		garageJpaEntity.lastTransmissionOilChange=entity.getLastTransmissionOilChange();
+		garageJpaEntity.lastBrakeFluidChangeDate=entity.getLastBrakeOilChangeDate();
+		garageJpaEntity.lastBrakeFluidChange=entity.getLastBrakeOilChange();
+		garageJpaEntity.lastBrakePadChangeDate=entity.getLastBrakePadChangeDate();
+		garageJpaEntity.lastBrakePadChange=entity.getLastBrakePadChange();
+		garageJpaEntity.lastSparkPlugAndCableReplacementDate=entity.getLastSparkPlugAndCableReplacementDate();
 		garageJpaEntity.lastSparkPlugAndCableReplacement=entity.getLastSparkPlugAndCableReplacement();
-		garageJpaEntity.lastBrakeFluidChange=entity.getLastBrakeFluidChange();
+		garageJpaEntity.fuelFilterChangeDate=entity.getFuelFilterChangeDate();
+		garageJpaEntity.fuelFilterChange=entity.getFuelFilterChange();
 		garageJpaEntity.lastChangeBatteryDate=entity.getLastChangeBatteryDate();
 		return garageJpaEntity;
 	}
@@ -64,10 +88,18 @@ public class GarageJpaEntity {
 				.serviceDrivingDistance(serviceDrivingDistance)
 				.serviceTotalFuelCost(serviceTotalFuelCost)
 				.serviceTotalFuelConsumption(serviceTotalFuelConsumption)
+				.lastEngineOilChangeDate(lastEngineOilChangeDate)
 				.lastEngineOilChange(lastEngineOilChange)
+				.lastTransmissionOilChangeDate(lastTransmissionOilChangeDate)
 				.lastTransmissionOilChange(lastTransmissionOilChange)
+				.lastBrakeOilChangeDate(lastBrakeFluidChangeDate)
+				.lastBrakeOilChange(lastBrakeFluidChange)
+				.lastBrakePadChangeDate(lastBrakePadChangeDate)
+				.lastBrakePadChange(lastBrakePadChange)
+				.lastSparkPlugAndCableReplacementDate(lastSparkPlugAndCableReplacementDate)
 				.lastSparkPlugAndCableReplacement(lastSparkPlugAndCableReplacement)
-				.lastBrakeFluidChange(lastBrakeFluidChange)
+				.fuelFilterChangeDate(fuelFilterChangeDate)
+				.fuelFilterChange(fuelFilterChange)
 				.lastChangeBatteryDate(lastChangeBatteryDate)
 				.build();
 	}
