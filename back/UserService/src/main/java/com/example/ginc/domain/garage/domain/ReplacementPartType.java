@@ -7,5 +7,5 @@ public enum ReplacementPartType {
     BRAKE_PAD,
     SPARK_PLUG_AND_CABLE,
     FUEL_FILTER,
-    CHANGE_BATTERY_DATE
+    BATTERY
 }

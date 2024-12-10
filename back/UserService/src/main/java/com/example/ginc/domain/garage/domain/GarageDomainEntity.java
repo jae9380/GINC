@@ -25,13 +25,14 @@ public class GarageDomainEntity {
 	private final Long lastSparkPlugAndCableReplacement;  //  최근 점화 플러그 및 케이블
 	private final Long fuelFilterChangeDate; //  최근 연료 필터 교체 날짜
 	private final Long fuelFilterChange;  //  최근 연료 필터
-	private final Long lastChangeBatteryDate;  //  배터리 교체 날짜
+	private final Long lastBatteryChange;  //  배터리 교체 날짜
+	private final Long lastBatteryChangeDate;  //  배터리 교체 날짜
 
 	@Builder
     public GarageDomainEntity(Long id, Long user_id, Long car_id, Long totalDrivingDistance,
 							  Long serviceDrivingDistance, Long serviceTotalFuelCost, Long serviceTotalFuelConsumption,
 							  Long lastEngineOilChange, Long lastTransmissionOilChange, Long lastSparkPlugAndCableReplacement,
-							  Long lastBrakeOilChange, Long lastChangeBatteryDate, Long lastEngineOilChangeDate,
+							  Long lastBrakeOilChange, Long lastBatteryChange, Long lastBatteryChangeDate, Long lastEngineOilChangeDate,
 							  Long lastTransmissionOilChangeDate, Long lastBrakeOilChangeDate, Long lastBrakePadChangeDate,
 							  Long lastBrakePadChange, Long lastSparkPlugAndCableReplacementDate, Long fuelFilterChangeDate,
 							  Long fuelFilterChange) {
@@ -46,7 +47,8 @@ public class GarageDomainEntity {
         this.lastTransmissionOilChange = lastTransmissionOilChange;
         this.lastSparkPlugAndCableReplacement = lastSparkPlugAndCableReplacement;
         this.lastBrakeOilChange = lastBrakeOilChange;
-        this.lastChangeBatteryDate = lastChangeBatteryDate;
+        this.lastBatteryChange = lastBatteryChange;
+        this.lastBatteryChangeDate = lastBatteryChangeDate;
 		this.lastEngineOilChangeDate = lastEngineOilChangeDate;
 		this.lastTransmissionOilChangeDate = lastTransmissionOilChangeDate;
 		this.lastBrakeOilChangeDate = lastBrakeOilChangeDate;
@@ -71,7 +73,8 @@ public class GarageDomainEntity {
 				.lastSparkPlugAndCableReplacement(lastSparkPlugAndCableReplacement)
 				.lastBrakeOilChangeDate(lastBrakeOilChangeDate)
 				.lastBrakeOilChange(lastBrakeOilChange)
-				.lastChangeBatteryDate(lastChangeBatteryDate)
+				.lastBatteryChange(lastBatteryChange)
+				.lastBatteryChangeDate(lastBatteryChangeDate)
 				.lastEngineOilChangeDate(lastEngineOilChangeDate)
 				.lastTransmissionOilChangeDate(lastTransmissionOilChangeDate)
 				.lastBrakePadChangeDate(lastBrakePadChangeDate)
@@ -96,7 +99,8 @@ public class GarageDomainEntity {
 				.lastSparkPlugAndCableReplacement(request.lastSparkPlugAndCableReplacement())
 				.lastBrakeOilChangeDate(clockHolder.parseDateToMillis(request.lastBrakeOilChangeDate()))
 				.lastBrakeOilChange(request.lastBrakeOilChange())
-				.lastChangeBatteryDate(clockHolder.parseDateToMillis(request.lastChangeBatteryDate()))
+				.lastBatteryChangeDate(clockHolder.parseDateToMillis(request.lastBatteryChangeDate()))
+				.lastBatteryChange(request.lastBatteryChange())
 				.lastEngineOilChangeDate(clockHolder.parseDateToMillis(request.lastEngineOilChangeDate()))
 				.lastTransmissionOilChangeDate(clockHolder.parseDateToMillis(request.lastTransmissionOilChangeDate()))
 				.lastBrakePadChangeDate(clockHolder.parseDateToMillis(request.lastBrakePadChangeDate()))

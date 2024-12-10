@@ -51,8 +51,10 @@ public class GarageJpaEntity {
 	private Long fuelFilterChangeDate;  // 최근 연료 필터 교체 날짜
 	@Column(name = "fuelFilterChange")
 	private Long fuelFilterChange;  // 최근 연료 필터
-	@Column(name = "lastChangeBatteryDate")
-	private Long lastChangeBatteryDate;  //  배터리 교체 날짜
+	@Column(name = "lastBatteryChangeDate")
+	private Long lastBatteryChangeDate;  //  배터리 교체 날짜
+	@Column(name = "lastBatteryChange")
+	private Long lastBatteryChange;  //  배터리 교체 날짜
 
 	public static GarageJpaEntity from(GarageDomainEntity entity) {
 		GarageJpaEntity garageJpaEntity = new GarageJpaEntity();
@@ -75,7 +77,8 @@ public class GarageJpaEntity {
 		garageJpaEntity.lastSparkPlugAndCableReplacement=entity.getLastSparkPlugAndCableReplacement();
 		garageJpaEntity.fuelFilterChangeDate=entity.getFuelFilterChangeDate();
 		garageJpaEntity.fuelFilterChange=entity.getFuelFilterChange();
-		garageJpaEntity.lastChangeBatteryDate=entity.getLastChangeBatteryDate();
+		garageJpaEntity.lastBatteryChangeDate =entity.getLastBatteryChangeDate();
+		garageJpaEntity.lastBatteryChange =entity.getLastBatteryChange();
 		return garageJpaEntity;
 	}
 
@@ -100,7 +103,8 @@ public class GarageJpaEntity {
 				.lastSparkPlugAndCableReplacement(lastSparkPlugAndCableReplacement)
 				.fuelFilterChangeDate(fuelFilterChangeDate)
 				.fuelFilterChange(fuelFilterChange)
-				.lastChangeBatteryDate(lastChangeBatteryDate)
+				.lastBatteryChangeDate(lastBatteryChangeDate)
+				.lastBatteryChange(lastBatteryChange)
 				.build();
 	}
 }

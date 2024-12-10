@@ -38,6 +38,11 @@ public class SystemClockHolder implements ClockHolder {
         }
     }
 
+    public long calculateDifferenceFromNow(long pastMillis) {
+        long currentMillis = millis();
+        return currentMillis - pastMillis;
+    }
+
     /*
     날짜 변환 시 년도를 제외한 정보를 정확한 기입하지 않을 경우 1월 또는 1일을 기본 값으로 변환
      */

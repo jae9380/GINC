@@ -19,6 +19,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import static com.example.ginc.domain.garage.domain.ReplacementPartType.ENGINE_OIL;
 
@@ -97,13 +98,11 @@ public class GarageServiceImpl implements GarageService {
     }
 
     private void checkReplacementCycle(GarageDomainEntity entity) {
-        Map<ReplacementPartType, Boolean> replacementResults = garagePolicy.checkAllReplacementCycles(entity);
+        Set<ReplacementPartType> replacementResults = garagePolicy.checkAllReplacementCycles(entity);
 
-        replacementResults.forEach((partType, needsReplacement) -> {
-            if (needsReplacement) {
-                log.info(partType + " needs replacement.");
-                // TODO: 알림기능 구현 시, 부품교체 알림 발생 이벤트 처리
-            }
+        replacementResults.forEach(partType -> {
+            log.info(partType + " needs replacement.");
+            // TODO: 알림기능 구현 시, 부품교체 알림 발생 이벤트 처리
         });
     }
     private Optional<GarageDomainEntity> findByUser_Id(Long user_id) {

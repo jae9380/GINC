@@ -14,7 +14,8 @@ public record RegisterConsumables(
         Long lastSparkPlugAndCableReplacement,
         String fuelFilterChangeDate,
         Long fuelFilterChange,
-        String lastChangeBatteryDate // "yyyy-MM-dd" 형식
+        String lastBatteryChangeDate, // "yyyy-MM-dd" 형식
+        Long lastBatteryChange
 
 ) {
 }
