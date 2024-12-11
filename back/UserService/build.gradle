@@ -26,6 +26,9 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
+//  MailSender
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
 //  Data Access
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 

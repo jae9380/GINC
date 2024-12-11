@@ -5,12 +5,14 @@ import com.example.ginc.domain.account.domain.UserDomainEntity;
 import com.example.ginc.domain.account.domain.SignIn;
 import com.example.ginc.domain.account.domain.SignUp;
 import com.example.ginc.domain.account.domain.Update;
+import com.example.ginc.domain.account.event.SignupEvent;
 import com.example.ginc.domain.account.service.port.AccountRepository;
 import com.example.ginc.domain.account.service.port.BCryptPasswordEncoderService;
 import com.example.ginc.util.commone.service.port.ClockHolder;
 import com.example.ginc.domain.account.exception.AccountException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class AccountServiceImpl implements AccountService {
+    private final ApplicationEventPublisher publisher;
     private final AccountRepository accountRepository;
     private final BCryptPasswordEncoderService bCryptPasswordEncoderService;
     private final ClockHolder clockHolder;
@@ -34,6 +37,8 @@ public class AccountServiceImpl implements AccountService {
         UserDomainEntity userDomain = UserDomainEntity.create(request, encryptedPassword, clockHolder);
         accountRepository.save(userDomain);
         log.info("User {} successfully signed up.", request.username());
+
+        publisher.publishEvent(new SignupEvent(this, request.email()));
     }
 
     @Override
