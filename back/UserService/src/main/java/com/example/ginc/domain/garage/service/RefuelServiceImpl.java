@@ -31,7 +31,7 @@ public class RefuelServiceImpl implements RefuelService {
                         garageService.getCar_IdByUser_Id(user_id),
                         clockHolder));
 
-        publisher.publishEvent(new RefuelingEvent(this, user_id, entity));
+        publisher.publishEvent(new RefuelingEvent(this,"UPDATE", user_id, entity));
         // TODO: 유류타입 예외 체크
     }
 
@@ -48,15 +48,36 @@ public class RefuelServiceImpl implements RefuelService {
 
     @Override
     @Transactional
-    public void modifyRefueling(Long refueling_id, Refueling request) {
+    public void modifyRefueling(Long user_id, Long refueling_id, Refueling request) {
         RefuelDomainEntity entity = refuelRepository.getById(refueling_id);
-        refuelRepository.save(entity.update(request,clockHolder));
+        int modifiedDistance = (request.segmentTotalDistance() - entity.getSegmentTotalDistance()),
+                modifiedCost = request.totalRefuelingCost() - entity.getTotalRefuelingCost(),
+                modifiedVolume = (request.refuelingVolume() - entity.getRefuelingVolume());
+        entity = entity.update(request,clockHolder);
+        refuelRepository.save(entity);
+
+        publisher.publishEvent(new RefuelingEvent(
+                this,"MODIFY", user_id,
+                RefuelDomainEntity.builder()
+                                .segmentTotalDistance(modifiedDistance)
+                                .totalRefuelingCost(modifiedCost)
+                                .refuelingVolume(modifiedVolume)
+                                .build()));
     }
 
     @Override
     @Transactional
-    public void deleteRefueling(Long refueling_id) {
+    public void deleteRefueling(Long user_id, Long refueling_id) {
+        RefuelDomainEntity entity = getById(refueling_id);
+
+        publisher.publishEvent(new RefuelingEvent(this, "DELETE", user_id,
+                RefuelDomainEntity.builder()
+                        .segmentTotalDistance(-entity.getSegmentTotalDistance())
+                        .totalRefuelingCost(-entity.getTotalRefuelingCost())
+                        .refuelingVolume(-entity.getRefuelingVolume())
+                        .build()));
         refuelRepository.deleteById(refueling_id);
+
     }
 
     @Override

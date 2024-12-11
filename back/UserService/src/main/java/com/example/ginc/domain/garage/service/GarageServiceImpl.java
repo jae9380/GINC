@@ -17,7 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+
+import static com.example.ginc.domain.garage.domain.ReplacementPartType.ENGINE_OIL;
 
 @Service
 @RequiredArgsConstructor
@@ -81,7 +85,7 @@ public class GarageServiceImpl implements GarageService {
     }
 
     @Override
-    public void refueling(RefuelDomainEntity refueling, Long user_id) {
+    public void refuelingEvent(RefuelDomainEntity refueling, Long user_id) {
         GarageDomainEntity entity = getByUser_Id(user_id);
 
         // TODO: user_id을 기준으로 Garage 불러오고, Garage의 user_id를 비교?
@@ -90,6 +94,16 @@ public class GarageServiceImpl implements GarageService {
         entity = entity.refueling(refueling);
 
         garageRepository.save(entity);
+        checkReplacementCycle(entity);
+    }
+
+    private void checkReplacementCycle(GarageDomainEntity entity) {
+        Set<ReplacementPartType> replacementResults = garagePolicy.checkAllReplacementCycles(entity);
+
+        replacementResults.forEach(partType -> {
+            log.info(partType + " needs replacement.");
+            // TODO: 알림기능 구현 시, 부품교체 알림 발생 이벤트 처리
+        });
     }
     private Optional<GarageDomainEntity> findByUser_Id(Long user_id) {
         return garageRepository.findByUserId(user_id);

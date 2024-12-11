@@ -10,11 +10,20 @@ public record GarageResponse (
         Long serviceDrivingDistance,
         Long serviceTotalFuelCost,
         Long serviceTotalFuelConsumption,
+        Long lastEngineOilChangeDate,
         Long lastEngineOilChange,
+        Long lastTransmissionOilChangeDate,
         Long lastTransmissionOilChange,
+        Long lastBrakeOilChangeDate,
+        Long lastBrakeOilChange,
+        Long lastBrakePadChangeDate,
+        Long lastBrakePadChange,
+        Long lastSparkPlugAndCableReplacementDate,
         Long lastSparkPlugAndCableReplacement,
-        Long lastBrakeFluidChange,
-        Long lastChangeBatteryDate
+        Long fuelFilterChangeDate,
+        Long fuelFilterChange,
+        Long lastBatteryChangeDate,
+        Long lastBatteryChange
 ){
     public static GarageResponse from(GarageDomainEntity entity) {
         return new GarageResponse(
@@ -25,11 +34,20 @@ public record GarageResponse (
                 entity.getServiceDrivingDistance(),
                 entity.getServiceTotalFuelCost(),
                 entity.getServiceTotalFuelConsumption(),
+                entity.getLastEngineOilChangeDate(),
                 entity.getLastEngineOilChange(),
+                entity.getLastTransmissionOilChangeDate(),
                 entity.getLastTransmissionOilChange(),
+                entity.getLastSparkPlugAndCableReplacementDate(),
                 entity.getLastSparkPlugAndCableReplacement(),
-                entity.getLastBrakeFluidChange(),
-                entity.getLastChangeBatteryDate()
+                entity.getLastBrakeOilChangeDate(),
+                entity.getLastBrakeOilChange(),
+                entity.getLastBrakePadChangeDate(),
+                entity.getLastBrakePadChange(),
+                entity.getFuelFilterChangeDate(),
+                entity.getLastEngineOilChange(),
+                entity.getLastBatteryChangeDate(),
+                entity.getLastBatteryChange()
         );
     }
 }

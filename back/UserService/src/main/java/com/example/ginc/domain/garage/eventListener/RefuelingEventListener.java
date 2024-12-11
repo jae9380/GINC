@@ -15,8 +15,8 @@ public class RefuelingEventListener {
 
     @EventListener
     public void refuelingEventListener(RefuelingEvent event) {
-        log.info("Refueling Event Operation : Update Garage information based on refueling records");
+        log.info(event.getAction()+" - Refueling Event Operation");
 
-        garageService.refueling(event.getEntity(), event.getUser_id());
+        garageService.refuelingEvent(event.getEntity(), event.getUser_id());
     }
 }
