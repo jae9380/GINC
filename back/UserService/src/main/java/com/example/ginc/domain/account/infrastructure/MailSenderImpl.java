@@ -22,7 +22,7 @@ public class MailSenderImpl implements MailSender {
     private final TemplateEngine templateEngine;
 
     @Override
-    public void send(String email, String title, String content) {
+    public void send(String email, String code) {
         Context context = new Context();
         context.setVariable("email", email);
         String htmlContent = templateEngine.process(EMAIL_TEMPLATE, context);
