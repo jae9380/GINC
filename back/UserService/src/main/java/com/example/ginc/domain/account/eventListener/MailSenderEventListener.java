@@ -2,9 +2,6 @@ package com.example.ginc.domain.account.eventListener;
 
 import com.example.ginc.domain.account.event.SignupEvent;
 import com.example.ginc.domain.account.infrastructure.MailSenderImpl;
-import com.example.ginc.domain.account.service.MailSendService;
-import com.example.ginc.domain.garage.controller.port.GarageService;
-import com.example.ginc.domain.garage.event.RefuelingEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
