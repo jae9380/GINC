@@ -19,14 +19,17 @@ public class UserDomainEntity {
     private final String phoneNumber;
     private final String email;
     private final Gender gender;
-    private final LocalDate birth;
+    private final Long birth;
     private final Role role;
     private final boolean authenticated;
-    private final LocalDate createdAt;
-    private final LocalDate modifiedAt;
+    private final Long createdAt;
+    private final Long modifiedAt;
 
     @Builder
-    public UserDomainEntity(Long id, String username, String password, String name, String phoneNumber, String email, Gender gender, LocalDate birth, Role role, boolean authenticated, LocalDate createdAt, LocalDate modifiedAt) {
+    public UserDomainEntity(Long id, String username, String password, String name,
+                            String phoneNumber, String email, Gender gender,
+                            Long birth, Role role, boolean authenticated,
+                            Long createdAt, Long modifiedAt) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -49,9 +52,9 @@ public class UserDomainEntity {
                 .phoneNumber(signUp.phoneNumber())
                 .email(signUp.email())
                 .gender(signUp.gender())
-                .birth(LocalDate.parse(signUp.birth()))
+                .birth(clockHolder.parseDateToMillis(signUp.birth()))
                 .role(signUp.username().equals("admin")?ADMIN:GUEST)
-                .createdAt(clockHolder.now())
+                .createdAt(clockHolder.millis())
                 .build();
     }
 
@@ -64,11 +67,11 @@ public class UserDomainEntity {
                 .phoneNumber(phoneNumber)
                 .email(email)
                 .gender(gender)
-                .birth(LocalDate.parse(update.birth()))
+                .birth(birth)
                 .role(role)
                 .authenticated(authenticated)
                 .createdAt(createdAt)
-                .modifiedAt(clockHolder.now())
+                .modifiedAt(clockHolder.millis())
                 .build();
     }
 }
