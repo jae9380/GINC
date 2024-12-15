@@ -19,7 +19,7 @@ public class MyPageController {
 
     @GetMapping
     public ApiResponse<MyProfileResponse> getInfo(@AuthenticationPrincipal MemberDetails memberDetails) {
-        return ApiResponse.ok(MyProfileResponse.from(accountService.getById(memberDetails.getId())));
+        return ApiResponse.ok(accountService.getMyProfileById(memberDetails.getId()));
     }
 
     @PutMapping
@@ -30,4 +30,5 @@ public class MyPageController {
     }
 
 //    TODO - 회원가입 시 인증 이메일 발송 및 이메일 인증 로직 추가
+//    TODO : 발송된 이메일 인증코드를 바탕으로 유저 인증하는 PostMapping추가
 }

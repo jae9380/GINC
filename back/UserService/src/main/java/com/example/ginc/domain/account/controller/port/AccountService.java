@@ -1,5 +1,6 @@
 package com.example.ginc.domain.account.controller.port;
 
+import com.example.ginc.domain.account.controller.response.MyProfileResponse;
 import com.example.ginc.domain.account.domain.UserDomainEntity;
 import com.example.ginc.domain.account.domain.SignIn;
 import com.example.ginc.domain.account.domain.SignUp;
@@ -15,4 +16,5 @@ public interface AccountService {
     UserDomainEntity getByUsername(String username);
 
     UserDomainEntity getById(Long id);
+    MyProfileResponse getMyProfileById(Long id);
 }

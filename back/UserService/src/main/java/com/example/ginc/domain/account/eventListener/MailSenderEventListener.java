@@ -18,6 +18,6 @@ public class MailSenderEventListener {
     public void signupEventListener(SignupEvent event) {
         log.info("Send to Mail "+event.getUser_email()+" - SignUp Event Operation");
 
-        mailAuthService.send(event.getUser_email());
+        mailAuthService.send(event.getUser_email(), event.getUser_id());
     }
 }

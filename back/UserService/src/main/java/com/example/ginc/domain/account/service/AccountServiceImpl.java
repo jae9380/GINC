@@ -1,6 +1,7 @@
 package com.example.ginc.domain.account.service;
 
 import com.example.ginc.domain.account.controller.port.AccountService;
+import com.example.ginc.domain.account.controller.response.MyProfileResponse;
 import com.example.ginc.domain.account.domain.UserDomainEntity;
 import com.example.ginc.domain.account.domain.SignIn;
 import com.example.ginc.domain.account.domain.SignUp;
@@ -35,10 +36,11 @@ public class AccountServiceImpl implements AccountService {
 
         String encryptedPassword = bCryptPasswordEncoderService.encrypt(request.password());
         UserDomainEntity userDomain = UserDomainEntity.create(request, encryptedPassword, clockHolder);
-        accountRepository.save(userDomain);
+        userDomain = accountRepository.save(userDomain);
         log.info("User {} successfully signed up.", request.username());
 
-        publisher.publishEvent(new SignupEvent(this, request.email()));
+//      TODO : 회원가입 시 이메일 발송 로직을 추가하니 기존 응답시간에 비하여 많이 느려진다. 그렇기 때문에 이메일 발송 로직을 분리
+        publisher.publishEvent(new SignupEvent(this, request.email(), userDomain.getId()));
     }
 
     @Override
@@ -68,6 +70,13 @@ public class AccountServiceImpl implements AccountService {
     public UserDomainEntity getById(Long id) {
         return findById(id)
                 .orElseThrow(AccountException.MemberNotFoundException::new);
+    }
+
+    @Override
+    public MyProfileResponse getMyProfileById(Long id) {
+        UserDomainEntity entity = getById(id);
+        return MyProfileResponse.from(entity,clockHolder);
+
     }
 
     private void validationByUsername(String username) {

@@ -7,4 +7,5 @@ public interface ClockHolder {
     long millis();
     Long parseDateToMillis(String dateStr);
     long calculateDifferenceFromNow(long pastMillis);
+    LocalDate millisToLocalDate(Long millis);
 }

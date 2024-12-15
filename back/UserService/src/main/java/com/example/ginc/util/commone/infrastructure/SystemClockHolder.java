@@ -5,6 +5,7 @@ import com.example.ginc.util.exception.GlobalException;
 import org.springframework.stereotype.Component;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 @Component
@@ -32,7 +33,15 @@ public class SystemClockHolder implements ClockHolder {
             throw new GlobalException.BadInputFormatException();
         }
     }
+    @Override
+    public LocalDate millisToLocalDate(Long millis) {
+        if (millis == null) {
+            return LocalDate.of(0, 1, 1);
+        }
+        return Instant.ofEpochMilli(millis).atZone(ZoneOffset.UTC).toLocalDate();
+    }
 
+    @Override
     public long calculateDifferenceFromNow(long pastMillis) {
         long currentMillis = millis();
         return currentMillis - pastMillis;

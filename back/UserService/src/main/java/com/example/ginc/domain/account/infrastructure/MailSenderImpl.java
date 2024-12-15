@@ -24,7 +24,7 @@ public class MailSenderImpl implements MailSender {
     @Override
     public void send(String email, String code) {
         Context context = new Context();
-        context.setVariable("email", email);
+        context.setVariable("code", code);
         String htmlContent = templateEngine.process(EMAIL_TEMPLATE, context);
 
         try {

@@ -3,6 +3,7 @@ package com.example.ginc.domain.account.controller.response;
 import com.example.ginc.domain.account.domain.UserDomainEntity;
 import com.example.ginc.domain.account.infrastructure.entity.type.Gender;
 import com.example.ginc.domain.account.infrastructure.entity.type.Role;
+import com.example.ginc.util.commone.service.port.ClockHolder;
 
 import java.time.LocalDate;
 
@@ -18,7 +19,7 @@ public record MyProfileResponse(
         LocalDate createdAt,
         LocalDate modifiedAt
 ) {
-    public static MyProfileResponse from(UserDomainEntity userDomainEntity) {
+    public static MyProfileResponse from(UserDomainEntity userDomainEntity, ClockHolder clockHolder) {
         return new MyProfileResponse(
                 userDomainEntity.getUsername(),
                 userDomainEntity.getPassword(),
@@ -26,10 +27,10 @@ public record MyProfileResponse(
                 userDomainEntity.getPhoneNumber(),
                 userDomainEntity.getEmail(),
                 userDomainEntity.getGender(),
-                userDomainEntity.getBirth(),
+                clockHolder.millisToLocalDate(userDomainEntity.getBirth()),
                 userDomainEntity.isAuthenticated(),
-                userDomainEntity.getCreatedAt(),
-                userDomainEntity.getModifiedAt()
+                clockHolder.millisToLocalDate(userDomainEntity.getCreatedAt()),
+                clockHolder.millisToLocalDate(userDomainEntity.getModifiedAt())
         );
     }
 }
