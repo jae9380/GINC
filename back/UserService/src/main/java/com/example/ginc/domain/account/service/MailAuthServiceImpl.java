@@ -1,7 +1,6 @@
 package com.example.ginc.domain.account.service;
 
-import com.example.ginc.domain.account.domain.UserDomainEntity;
-import com.example.ginc.domain.account.exception.AccountException;
+import com.example.ginc.domain.account.exception.EmailException;
 import com.example.ginc.domain.account.infrastructure.entity.AuthCode;
 import com.example.ginc.domain.account.service.port.MailAuthRepository;
 import com.example.ginc.domain.account.service.port.MailAuthService;
@@ -25,6 +24,13 @@ public class MailAuthServiceImpl implements MailAuthService {
     @Override
     public void send(String email, Long user_id) {
         mailSender.send(email, createCode(user_id));
+    }
+
+    @Override
+    public boolean certification(Long user_id, String authCode) {
+        if (!getByUserId(user_id).getAuthCode().equals(authCode))
+            throw new EmailException.AuthCodeInconsistencyException();
+        return true;
     }
 
     @Transactional
@@ -52,7 +58,7 @@ public class MailAuthServiceImpl implements MailAuthService {
 
     private AuthCode getByUserId(Long user_id) {
         return findByUserId(user_id)
-                .orElseThrow(AccountException.MemberNotFoundException::new); // TODO : 예외 임시로 사용
+                .orElseThrow(EmailException.AuthCodeNotFoundException::new);
     }
 
     private Optional<AuthCode> findByUserId(long user_id) {

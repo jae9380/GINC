@@ -7,8 +7,10 @@ import com.example.ginc.domain.account.domain.SignIn;
 import com.example.ginc.domain.account.domain.SignUp;
 import com.example.ginc.domain.account.domain.Update;
 import com.example.ginc.domain.account.event.SignupEvent;
+import com.example.ginc.domain.account.exception.EmailException;
 import com.example.ginc.domain.account.service.port.AccountRepository;
 import com.example.ginc.domain.account.service.port.BCryptPasswordEncoderService;
+import com.example.ginc.domain.account.service.port.MailAuthService;
 import com.example.ginc.util.commone.service.port.ClockHolder;
 import com.example.ginc.domain.account.exception.AccountException;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final BCryptPasswordEncoderService bCryptPasswordEncoderService;
     private final ClockHolder clockHolder;
+    private final MailAuthService mailAuthService;
 
     @Override
     @Transactional
@@ -77,6 +80,14 @@ public class AccountServiceImpl implements AccountService {
         UserDomainEntity entity = getById(id);
         return MyProfileResponse.from(entity,clockHolder);
 
+    }
+
+    @Override
+    @Transactional
+    public String certificationAtEmail(Long id, String authCode) {
+        mailAuthService.certification(id, authCode);
+        accountRepository.save(getById(id).certification());
+        return "인증에 성공했습니다.";
     }
 
     private void validationByUsername(String username) {

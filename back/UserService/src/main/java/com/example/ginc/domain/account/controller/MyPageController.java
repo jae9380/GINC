@@ -3,6 +3,7 @@ package com.example.ginc.domain.account.controller;
 import com.example.ginc.domain.account.controller.port.AccountService;
 import com.example.ginc.domain.account.controller.response.MyProfileResponse;
 import com.example.ginc.domain.account.domain.Update;
+import com.example.ginc.domain.account.service.port.MailAuthService;
 import com.example.ginc.util.Empty;
 import com.example.ginc.util.apiResponse.ApiResponse;
 import com.example.ginc.util.auth.MemberDetails;
@@ -29,6 +30,10 @@ public class MyPageController {
         return ApiResponse.noContent();
     }
 
-//    TODO - 회원가입 시 인증 이메일 발송 및 이메일 인증 로직 추가
-//    TODO : 발송된 이메일 인증코드를 바탕으로 유저 인증하는 PostMapping추가
+    @PostMapping("/email_certification/{AuthCode}")
+    public ApiResponse<String> emailCertification(@AuthenticationPrincipal MemberDetails memberDetails,
+                                                 @PathVariable(name = "AuthCode") String authCode) {
+        return ApiResponse.ok(accountService.certificationAtEmail(memberDetails.getId(), authCode));
+        //    TODO : 이메일 인증 방법을 Code 입력 방법 & 특정 페이지로 이동하여 인증하는 방법 中 선택
+    }
 }

@@ -74,4 +74,21 @@ public class UserDomainEntity {
                 .modifiedAt(clockHolder.millis())
                 .build();
     }
+
+    public UserDomainEntity certification() {
+        return UserDomainEntity.builder()
+                .id(id)
+                .username(username)
+                .password(password)
+                .name(name)
+                .phoneNumber(phoneNumber)
+                .email(email)
+                .gender(gender)
+                .birth(birth)
+                .role(USER)
+                .authenticated(true)
+                .createdAt(createdAt)
+                .modifiedAt(modifiedAt)
+                .build();
+    }
 }

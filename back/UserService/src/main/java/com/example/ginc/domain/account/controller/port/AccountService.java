@@ -8,13 +8,10 @@ import com.example.ginc.domain.account.domain.Update;
 
 public interface AccountService {
     void signup(SignUp request);
-
     void updateUserInfo(Long id, Update request);
-
     void login(SignIn signIn);
-
     UserDomainEntity getByUsername(String username);
-
     UserDomainEntity getById(Long id);
     MyProfileResponse getMyProfileById(Long id);
+    String certificationAtEmail(Long id, String authCode);
 }

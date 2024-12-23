@@ -28,5 +28,17 @@ public class AccountException extends GincException {
             super(INVALID_PASSWORD);
         }
     }
+
+    public static class AuthCodeNotFoundException extends AccountException {
+        public AuthCodeNotFoundException() {
+            super(AUTHCODE_NOT_FOUND);
+        }
+    }
+
+    public static class AuthCodeInconsistencyException extends AccountException {
+        public AuthCodeInconsistencyException() {
+            super(AUTHCODE_INCONSISTENCY);
+        }
+    }
 }
 
