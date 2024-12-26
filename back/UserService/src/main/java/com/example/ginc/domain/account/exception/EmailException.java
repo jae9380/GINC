@@ -22,5 +22,11 @@ public class EmailException extends GincException {
             super(AUTHCODE_INCONSISTENCY);
         }
     }
+    public static class InitiateEmailRequestException extends EmailException {
+        public InitiateEmailRequestException() {
+            super(INITIATE_EMAIL_REQUEST);
+        }
+    }
+
 }
 

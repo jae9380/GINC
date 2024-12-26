@@ -7,10 +7,8 @@ import com.example.ginc.domain.account.domain.SignIn;
 import com.example.ginc.domain.account.domain.SignUp;
 import com.example.ginc.domain.account.domain.Update;
 import com.example.ginc.domain.account.event.SignupEvent;
-import com.example.ginc.domain.account.exception.EmailException;
 import com.example.ginc.domain.account.service.port.AccountRepository;
 import com.example.ginc.domain.account.service.port.BCryptPasswordEncoderService;
-import com.example.ginc.domain.account.service.port.MailAuthService;
 import com.example.ginc.util.commone.service.port.ClockHolder;
 import com.example.ginc.domain.account.exception.AccountException;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +28,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final BCryptPasswordEncoderService bCryptPasswordEncoderService;
     private final ClockHolder clockHolder;
-    private final MailAuthService mailAuthService;
+    private final MailAuthServiceImpl mailAuthService;
 
     @Override
     @Transactional

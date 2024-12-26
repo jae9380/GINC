@@ -3,7 +3,6 @@ package com.example.ginc.domain.account.controller;
 import com.example.ginc.domain.account.controller.port.AccountService;
 import com.example.ginc.domain.account.controller.response.MyProfileResponse;
 import com.example.ginc.domain.account.domain.Update;
-import com.example.ginc.domain.account.service.port.MailAuthService;
 import com.example.ginc.util.Empty;
 import com.example.ginc.util.apiResponse.ApiResponse;
 import com.example.ginc.util.auth.MemberDetails;

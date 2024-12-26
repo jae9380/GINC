@@ -37,7 +37,10 @@ spring:
           timeout: 5000
           starttls:
             enable: true
-
+  data:
+    redis:
+      host: localhost
+      port: 6379
 # 배치코드 변경으로 사용 x
 #  batch:
 #    job:

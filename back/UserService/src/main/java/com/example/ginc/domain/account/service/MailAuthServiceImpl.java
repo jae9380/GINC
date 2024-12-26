@@ -3,7 +3,6 @@ package com.example.ginc.domain.account.service;
 import com.example.ginc.domain.account.exception.EmailException;
 import com.example.ginc.domain.account.infrastructure.entity.AuthCode;
 import com.example.ginc.domain.account.service.port.MailAuthRepository;
-import com.example.ginc.domain.account.service.port.MailAuthService;
 import com.example.ginc.domain.account.service.port.MailSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,19 +16,24 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Slf4j
-public class MailAuthServiceImpl implements MailAuthService {
+public class MailAuthServiceImpl {
     private final MailSender mailSender;
     private final MailAuthRepository mailAuthRepository;
+    private final StorageService storageService;
 
-    @Override
     public void send(String email, Long user_id) {
-        mailSender.send(email, createCode(user_id));
+        String authCode = createCode(user_id);
+        storageService.StoreAuthCode(user_id, authCode);
+        mailSender.send(email, authCode);
     }
 
-    @Override
-    public boolean certification(Long user_id, String authCode) {
-        if (!getByUserId(user_id).getAuthCode().equals(authCode))
+    public boolean certification(Long user_id, String inputAuthCode) {
+        String authCode = storageService.getAuthCode(user_id);
+        System.out.println("authCode : "+authCode);
+        if (!authCode.equals(inputAuthCode))
             throw new EmailException.AuthCodeInconsistencyException();
+
+        storageService.deleteAuthCode(user_id);
         return true;
     }
 
@@ -38,13 +42,13 @@ public class MailAuthServiceImpl implements MailAuthService {
         String randomKey = RandomStringUtils.randomAlphanumeric(8);
         if (findByUserId(user_id).isPresent()) {
             AuthCode authCodeEntity = getByUserId(user_id);
-            mailAuthRepository.save( authCodeEntity.change(randomKey));
+//            mailAuthRepository.save( authCodeEntity.change(randomKey));
 
             return randomKey;
         }
 
         AuthCode authCode = AuthCode.create(user_id, randomKey);
-        mailAuthRepository.save(authCode);
+//        mailAuthRepository.save(authCode);
         return randomKey;
 /*
         TODO :

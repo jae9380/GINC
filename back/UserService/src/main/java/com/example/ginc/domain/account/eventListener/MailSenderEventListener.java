@@ -1,8 +1,7 @@
 package com.example.ginc.domain.account.eventListener;
 
 import com.example.ginc.domain.account.event.SignupEvent;
-import com.example.ginc.domain.account.infrastructure.MailSenderImpl;
-import com.example.ginc.domain.account.service.port.MailAuthService;
+import com.example.ginc.domain.account.service.MailAuthServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class MailSenderEventListener {
-    private final MailAuthService mailAuthService;
+    private final MailAuthServiceImpl mailAuthService;
 
     @EventListener
     public void signupEventListener(SignupEvent event) {
