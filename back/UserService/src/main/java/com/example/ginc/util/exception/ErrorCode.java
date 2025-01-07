@@ -19,8 +19,12 @@ public enum ErrorCode {
     // Garage
     GARAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "일치하는 차고 정보가 없습니다."),
     CAR_NOT_FOUND(HttpStatus.NOT_FOUND, "등록된 차량 정보가 없습니다."),
-    REFUELING_RECORD_NOT_FOUND(HttpStatus.NOT_FOUND, "등록된 주유 기록이 없습니다.");
+    REFUELING_RECORD_NOT_FOUND(HttpStatus.NOT_FOUND, "등록된 주유 기록이 없습니다."),
 
+    // Mail
+    AUTHCODE_NOT_FOUND(HttpStatus.NOT_FOUND, "등록된 인증 코드가 없습니다."),
+    AUTHCODE_INCONSISTENCY(HttpStatus.UNAUTHORIZED, "인증 코드가 일치하지 않습니다."),
+    INITIATE_EMAIL_REQUEST(HttpStatus.BAD_REQUEST, "먼저 이메일 인증 요청을 진행하세요.");
 
     private final HttpStatus status;
     private final String message;

@@ -44,7 +44,7 @@ public class UserJpaEntity {
     private Gender gender;
 
     @Column(name = "birth")
-    private LocalDate birth;
+    private Long birth;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
@@ -54,10 +54,10 @@ public class UserJpaEntity {
     private boolean authenticated;
 
     @Column(name = "createdAt")
-    private LocalDate createdAt;
+    private Long createdAt;
 
     @Column(name = "modifiedAt")
-    private LocalDate modifiedAt;
+    private Long modifiedAt;
 
     public static UserJpaEntity from(UserDomainEntity entity) {
         UserJpaEntity userJpaEntity = new UserJpaEntity();

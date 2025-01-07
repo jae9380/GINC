@@ -1,7 +1,7 @@
 package com.example.ginc.domain.garage.domain;
 
 import com.example.ginc.domain.garage.infrastructure.entity.type.FuelType;
-import com.example.ginc.util.commone.service.port.ClockHolder;
+import com.example.service.port.ClockHolder;
 import lombok.Builder;
 import lombok.Getter;
 

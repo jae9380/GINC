@@ -9,7 +9,7 @@ import com.example.ginc.domain.garage.policy.GaragePolicy;
 import com.example.ginc.domain.garage.service.port.CarRepository;
 import com.example.ginc.domain.garage.service.port.CarService;
 import com.example.ginc.domain.garage.service.port.GarageRepository;
-import com.example.ginc.util.commone.service.port.ClockHolder;
+import com.example.service.port.ClockHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -8,10 +8,6 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class TestClockHolder implements ClockHolder {
     private final String date;
-    @Override
-    public LocalDate now() {
-        return LocalDate.parse(date);
-    }
 
     @Override
     public long millis() {
@@ -21,5 +17,10 @@ public class TestClockHolder implements ClockHolder {
     @Override
     public Long parseDateToMillis(String dateStr) {
         return null;
+    }
+
+    @Override
+    public long calculateDifferenceFromNow(long pastMillis) {
+        return 0;
     }
 }

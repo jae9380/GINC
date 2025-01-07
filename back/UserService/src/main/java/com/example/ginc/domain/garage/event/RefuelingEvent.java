@@ -11,7 +11,7 @@ public class RefuelingEvent extends ApplicationEvent {
     private final RefuelDomainEntity entity;
     public RefuelingEvent(Object source, String action, Long userId, RefuelDomainEntity entity) {
         super(source);
-        user_id = userId;
+        this.user_id = userId;
         this.action = action;
         this.entity = entity;
     }
