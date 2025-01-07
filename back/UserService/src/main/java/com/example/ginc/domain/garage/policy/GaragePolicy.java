@@ -2,7 +2,7 @@ package com.example.ginc.domain.garage.policy;
 
 import com.example.ginc.domain.garage.domain.GarageDomainEntity;
 import com.example.ginc.domain.garage.domain.ReplacementPartType;
-import com.example.ginc.util.commone.service.port.ClockHolder;
+import com.example.service.port.ClockHolder;
 import com.example.ginc.util.exception.GlobalException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

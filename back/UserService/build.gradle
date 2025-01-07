@@ -21,9 +21,14 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
+//  Customize Library
+//  Clock Holder
+    implementation 'com.github.jae9380:lib-ClockHolder:0.0.4'
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
 //  Redis

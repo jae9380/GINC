@@ -2,7 +2,7 @@ package com.example.ginc.domain.account.domain;
 
 import com.example.ginc.domain.account.infrastructure.entity.type.Gender;
 import com.example.ginc.domain.account.infrastructure.entity.type.Role;
-import com.example.ginc.util.commone.service.port.ClockHolder;
+import com.example.service.port.ClockHolder;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -6,7 +6,7 @@ import com.example.ginc.domain.garage.controller.port.RefuelService;
 import com.example.ginc.domain.garage.domain.RefuelDomainEntity;
 import com.example.ginc.domain.garage.domain.Refueling;
 import com.example.ginc.domain.garage.service.port.RefuelRepository;
-import com.example.ginc.util.commone.service.port.ClockHolder;
+import com.example.service.port.ClockHolder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
