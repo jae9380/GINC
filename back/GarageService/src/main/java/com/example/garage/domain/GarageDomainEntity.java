@@ -1,6 +1,6 @@
 package com.example.garage.domain;
 
-import com.example.ginc.util.commone.service.port.ClockHolder;
+import com.example.service.port.ClockHolder;
 import lombok.Builder;
 import lombok.Getter;
 

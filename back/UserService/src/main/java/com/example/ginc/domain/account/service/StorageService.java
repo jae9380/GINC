@@ -2,7 +2,7 @@ package com.example.ginc.domain.account.service;
 
 import com.example.ginc.domain.account.exception.EmailException;
 import com.example.ginc.domain.account.service.port.RedisStorage;
-import com.example.ginc.util.exception.GincException;
+import com.example.apiresponse.exception.GincException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

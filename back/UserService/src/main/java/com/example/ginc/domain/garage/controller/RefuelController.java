@@ -2,11 +2,9 @@ package com.example.ginc.domain.garage.controller;
 
 import com.example.ginc.domain.garage.controller.port.RefuelService;
 import com.example.ginc.domain.garage.controller.response.RefuelResponse;
-import com.example.ginc.domain.garage.domain.RefuelDomainEntity;
 import com.example.ginc.domain.garage.domain.Refueling;
-import com.example.ginc.domain.garage.domain.RegisterVehicle;
-import com.example.ginc.util.Empty;
-import com.example.ginc.util.apiResponse.ApiResponse;
+import com.example.apiresponse.apiResponse.Empty;
+import com.example.apiresponse.apiResponse.ApiResponse;
 import com.example.ginc.util.auth.MemberDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

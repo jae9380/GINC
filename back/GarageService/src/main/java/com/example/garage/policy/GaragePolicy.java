@@ -2,7 +2,7 @@ package com.example.garage.policy;
 
 import com.example.garage.domain.GarageDomainEntity;
 import com.example.garage.domain.ReplacementPartType;
-import com.example.util.commone.service.port.ClockHolder;
+import com.example.service.port.ClockHolder;
 import com.example.util.exception.GlobalException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static com.example.ginc.domain.garage.domain.ReplacementPartType.*;
+import static com.example.garage.domain.ReplacementPartType.*;
+
 
 @Component
 @RequiredArgsConstructor

@@ -1,9 +1,9 @@
 package com.example.ginc.util.configuration;
 
 import com.example.ginc.domain.account.exception.AccountException;
-import com.example.ginc.util.exception.ErrorCode;
-import com.example.ginc.util.apiResponse.ApiResponse;
-import com.example.ginc.util.Empty;
+import com.example.apiresponse.exception.ErrorCode;
+import com.example.apiresponse.apiResponse.ApiResponse;
+import com.example.apiresponse.apiResponse.Empty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
